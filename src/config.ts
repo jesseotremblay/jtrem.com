@@ -49,12 +49,6 @@ export const SOCIALS: SocialObjects = [
     active: true,
   },
   {
-    name: "Mail",
-    href: "mailto:contact@jtrem.com",
-    linkTitle: `Send an email to ${SITE.title}`,
-    active: true,
-  },
-  {
     name: "Twitter",
     href: "https://github.com/satnaing/astro-paper",
     linkTitle: `${SITE.title} on Twitter`,
@@ -142,6 +136,18 @@ export const SOCIALS: SocialObjects = [
     name: "Mastodon",
     href: "https://jtrem.me/@jesse",
     linkTitle: `${SITE.title} on Mastodon`,
+    active: true,
+  },
+  {
+    name: "Mail",
+    href: "mailto:contact@jtrem.com",
+    linkTitle: `Send an email to ${SITE.title}`,
+    active: true,
+  },
+  {
+    name: "RSS",
+    href: "/rss.xml",
+    linkTitle: `${SITE.title}`,
     active: true,
   },
 ];
