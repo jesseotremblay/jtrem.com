@@ -14,8 +14,27 @@ I'm a Product Leader who was born & raised in New England and currently lives ne
 
 Jtrem.com is a personal website (re)launched in 2013 by Jesse Tremblay.
 
-This version of the site was made with [Astro](https://astro.build). I write most posts in [Drafts](https://getdrafts.com) but sometimes I need to writer longer posts in [Obsidian](https://obsidian.md/). The domain is registered through [Hover](https://hover.com) and served to you via a [DigitalOcean](https://digitalocean.com) droplet.
+This version of the site was made with [Astro](https://astro.build) and deployed with [Netlify](https://netflify). I've trimmed it back to a simple static-site so that I can keep it lightweight, fast and focus on content.
 
-#### Essential Tools: [GitHub](https://github.com/); [Zed](https://zed.dev/); [Keychron K2](https://www.keychron.com/products/keychron-k2-wireless-mechanical-keyboard); [Alfred](https://www.alfredapp.com/); [TextExpander](https://textexpander.com/); [1Password](https://1password.com/); [NetNewsWire](https://netnewswire.com/); [Matter](https://hq.getmatter.com/)
+### Essential Tools:
+
+#### Web Development
+
+- [GitHub](https://github.com/)
+- [Zed](https://zed.dev/)
+
+#### Writing
+
+- [Drafts](https://getdrafts.com)
+- [Obsidian](https://obsidian.md/)
+- [TextExpander](https://textexpander.com/)
+- [Keychron K2](https://www.keychron.com/products/keychron-k2-wireless-mechanical-keyboard)
+
+#### Writing
+
+- [Alfred](https://www.alfredapp.com/)
+- [1Password](https://1password.com/)
+- [NetNewsWire](https://netnewswire.com/)
+- [Matter](https://hq.getmatter.com/)
 
 Thanks for stopping by ✌️
