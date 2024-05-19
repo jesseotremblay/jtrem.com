@@ -8,7 +8,7 @@ date_updated: 2024-04-27T01:03:21.000Z
 
 ### These are some of my essential reads.
 
-Download [OPML](/jtrem.com-essential-reads.opml) file:
+Download [OPML](/blogroll.opml) file:
 
 - [Stratechery](https://stratechery.com/)
 - [The Verge](https://www.theverge.com/)
