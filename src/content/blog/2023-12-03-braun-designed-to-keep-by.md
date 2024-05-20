@@ -7,8 +7,9 @@ featured: false
 tags:
   - products
   - design
-  - link
+  - link-post
 description: "Braun has designed some of the most iconic consumer products. What's most impressive has been the reverberating impact on design aesthetic & function they created."
+canonicalURL: https://www.phaidon.com/res/logo-anniversary.svg
 ---
 
 Braun has designed some of the most iconic consumer products. What's most impressive has been the reverberating impact on design aesthetic & function they created.
