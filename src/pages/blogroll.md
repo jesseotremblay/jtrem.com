@@ -10,8 +10,12 @@ date_updated: 2024-04-27T01:03:21.000Z
 
 Download [OPML](/blogroll.opml) file:
 
-- [Stratechery](https://stratechery.com/)
-- [The Verge](https://www.theverge.com/)
-- [Daring Fireball](https://daringfireball.net/)
-- [Techmeme](https://www.techmeme.com/)
-- [NYT](https://www.nytimes.com/)
+| Site                                           | Author       | Tag |
+| ---------------------------------------------- | ------------ | --- |
+| [Stratechery](https://stratechery.com/)        | Ben Thompson | #   |
+| [Daring Fireball](https://daringfireball.net/) | John Gruber  | #   |
+|                                                |              |     |
+|                                                |              |     |
+|                                                |              |     |
+|                                                |              |     |
+|                                                |              |     |
