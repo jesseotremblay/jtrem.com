@@ -7,6 +7,7 @@ featured: false
 tags:
   - personal
   - product-management
+  - career
 description: "I am thrilled to announce that I am joining Hudl as a Product Manager in a few weeks. This decision excites me deeply, and I can't wait to share why this role feels like a perfect fit for me."
 ---
 I am thrilled to announce that I am joining Hudl as a Product Manager in a few weeks. This decision excites me deeply, and I can't wait to share why this role feels like a perfect fit for me.

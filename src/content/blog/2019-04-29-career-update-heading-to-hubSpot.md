@@ -7,6 +7,7 @@ featured: false
 tags:
   - personal
   - product-management
+  - career
 description: "A few weeks ago I made the decision to join HubSpot as a Senior Product Manager."
 ---
 
