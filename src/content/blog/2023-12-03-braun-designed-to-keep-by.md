@@ -13,12 +13,4 @@ canonicalURL: https://www.phaidon.com/res/logo-anniversary.svg
 ---
 
 Braun has designed some of the most iconic consumer products. What's most impressive has been the reverberating impact on design aesthetic & function they created.
-[
-
-Braun | Design | Store | Phaidon
-
-![](https://www.phaidon.com/favicon.ico)PHAIDONPhaidon
-
-![](https://www.phaidon.com/res/logo-anniversary.svg)
-](https://www.phaidon.com/store/design/braun-designed-to-keep-9781838663896/)
-Braun: Designed to Keep by Klaus Kemp
+[Braun: Designed to Keep by Klaus Kemp](https://www.phaidon.com/store/design/braun-designed-to-keep-9781838663896/)
