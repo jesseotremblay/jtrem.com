@@ -1,6 +1,6 @@
 ---
 author: Jesse Tremblay
-pubDatetime: 2023-02-07T12:15:00.000Z
+pubDatetime: 2023-02-07
 title: Instagram Founder's New App, Artifact
 slug: "instagram-founders-new-app-artifact"
 featured: false

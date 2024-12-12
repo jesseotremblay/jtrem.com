@@ -1,6 +1,6 @@
 ---
 author: Jesse Tremblay
-pubDatetime: 2023-08-01T16:12:00.000Z
+pubDatetime: 2023-08-01
 title: (temp) Migrating to Self-hosted Ghost
 slug: "migrating-to-self-hosted-ghost"
 featured: false

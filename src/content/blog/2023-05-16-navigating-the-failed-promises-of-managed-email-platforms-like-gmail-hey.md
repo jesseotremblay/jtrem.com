@@ -1,6 +1,6 @@
 ---
 author: Jesse Tremblay
-pubDatetime: 2023-05-17T02:06:00.000Z
+pubDatetime: 2023-05-17
 title: Navigating the failed promises of managed email platforms
 slug: "navigating-the-failed-promises-of-managed-email-platforms"
 featured: false

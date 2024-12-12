@@ -1,6 +1,6 @@
 ---
 author: Jesse Tremblay
-pubDatetime: 2023-04-23T08:54:00.000Z
+pubDatetime: 2023-04-23
 title: Reclaiming My Corner of the Internet
 slug: "reclaiming-my-corner-of-the-internet"
 featured: false

@@ -1,6 +1,6 @@
 ---
 author: Jesse Tremblay
-pubDatetime: 2023-10-04T01:24:00.000Z
+pubDatetime: 2023-10-04
 title: TootBoost - As a startup founder...
 slug: "tootboost-as-a-startup-founder"
 featured: false

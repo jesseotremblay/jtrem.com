@@ -1,6 +1,6 @@
 ---
 author: Jesse Tremblay
-pubDatetime: 2015-02-01T12:09:31.000Z
+pubDatetime: 2015-02-01
 title: Career Update, Joining Runkeeper
 slug: “2015-02-01-career-update-joining-runkeeper"
 featured: false
@@ -8,7 +8,7 @@ tags:
   - personal
   - product-management
   - career
-description: "Starting Monday, I'll be working on one of my favorite apps...Runkeeper."
+description: Starting Monday, I'll be working on one of my favorite apps...Runkeeper.
 ---
 I've been a runner for years now, and one of my favorite tools in that running journey has been [Runkeeper](https://runkeeper.com/cms/).
 

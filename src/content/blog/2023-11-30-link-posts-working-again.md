@@ -1,6 +1,6 @@
 ---
 author: Jesse Tremblay
-pubDatetime: 2023-11-30T21:16:00.000Z
+pubDatetime: 2023-11-30
 title: Link Posts Working, Again
 slug: "link-posts-working-again"
 featured: false

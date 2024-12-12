@@ -1,6 +1,6 @@
 ---
 author: Jesse Tremblay
-pubDatetime: 2021-10-21T06:36:00.000Z
+pubDatetime: 2021-10-21
 title: Product strategy is work, not a recipe
 slug: "product-strategy-is-work-not-a-recipe"
 featured: false

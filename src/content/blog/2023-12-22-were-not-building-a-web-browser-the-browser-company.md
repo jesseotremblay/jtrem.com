@@ -1,6 +1,6 @@
 ---
 author: Jesse Tremblay
-pubDatetime: 2023-12-22T13:02:00.000Z
+pubDatetime: 2023-12-22
 title: We’re not building a web browser, The Browser Company
 slug: "were-not-building-a-web-browser-the-browser-company"
 featured: false

@@ -1,6 +1,6 @@
 ---
 author: Jesse Tremblay
-pubDatetime: 2023-12-03T11:44:00.000Z
+pubDatetime: 2023-12-03
 title: Braun - Designed to Keep by Klaus Kemp
 slug: "braun-designed-to-keep-by"
 featured: false

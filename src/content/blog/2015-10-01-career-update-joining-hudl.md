@@ -1,6 +1,6 @@
 ---
 author: Jesse Tremblay
-pubDatetime: 2015-10-01T14:51:41.000Z
+pubDatetime: 2015-10-01
 title: Career Update, Joining Hudl
 slug: "2015-10-01-career-update-joining-hudl"
 featured: false

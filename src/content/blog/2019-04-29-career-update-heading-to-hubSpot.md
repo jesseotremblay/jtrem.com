@@ -1,6 +1,6 @@
 ---
 author: Jesse Tremblay
-pubDatetime: 2019-04-29T18:25:01.000Z
+pubDatetime: 2019-04-29
 title: Career Update, Heading to HubSpot
 slug: "career-update-heading-to-hubSpot"
 featured: false

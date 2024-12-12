@@ -1,6 +1,6 @@
 ---
 author: Jesse Tremblay
-pubDatetime: 2023-09-03T02:22:00.000Z
+pubDatetime: 2023-09-03
 title: Context collapse with Beeper
 slug: "context-collapse-with-beeper"
 featured: false

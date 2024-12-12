@@ -1,6 +1,6 @@
 ---
 author: Jesse Tremblay
-pubDatetime: 2022-12-01T13:28:00.000Z
+pubDatetime: 2022-12-01
 title: Steve Jobs on Realizing Life Was Created By People No Smarter Than You
 slug: "steve-jobs-on-realizing-life-was-created-by-people-no-smarter-than-you"
 featured: false

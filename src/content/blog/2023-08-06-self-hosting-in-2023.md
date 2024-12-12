@@ -1,6 +1,6 @@
 ---
 author: Jesse Tremblay
-pubDatetime: 2023-08-06T12:30:00.000Z
+pubDatetime: 2023-08-06
 title: Self-hosting in 2023
 slug: "self-hosting-in-2023"
 featured: false

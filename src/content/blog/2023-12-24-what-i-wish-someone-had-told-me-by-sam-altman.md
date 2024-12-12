@@ -1,6 +1,6 @@
 ---
 author: Jesse Tremblay
-pubDatetime: 2023-12-24T17:05:00.000Z
+pubDatetime: 2023-12-24
 title: What I Wish Someone Had Told Me, by Sam Altman
 slug: "what-i-wish-someone-had-told-me-by-sam-altman"
 featured: false

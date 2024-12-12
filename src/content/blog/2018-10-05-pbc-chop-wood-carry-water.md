@@ -1,6 +1,6 @@
 ---
 author: Jesse Tremblay
-pubDatetime: 2018-10-05T16:13:04.000Z
+pubDatetime: 2018-10-05
 title: Product Book Club - Chop Wood Carry Water
 slug: "pbc-chop-wood-carry-water"
 featured: false
