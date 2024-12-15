@@ -1,7 +1,7 @@
 ---
 author: Jesse Tremblay
 pubDatetime: 2024-12-15
-title: Product Management Needs a Reset: From Optimization to Acceleration
+title: Product Management Needs a Reset. From Optimization to Acceleration.
 slug: "product-management-needs-a-reset"
 featured: false
 draft: false
