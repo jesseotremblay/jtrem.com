@@ -10,13 +10,17 @@ tags:
   - product-leadership
 description: "There's a palpable tension in the product management community these days. Over the past year, I've had countless conversations with PMs, product leaders, and executives trying to understand why. A clear pattern has emerged: product management has lost its way."
 ---
+# Product Management Needs a Reset: From Optimization to Acceleration
+
 There's a palpable tension in the product management community these days. Over the past year, I've had countless conversations with PMs, product leaders, and executives trying to understand why. A clear pattern has emerged: product management has lost its way.
 
 Over the last decade, we've transformed from a role focused on building great products into one obsessed with process and optimization. The irony is striking – the very frameworks meant to make us faster and more effective have become rigid orthodoxy. "Lean startup," "agile," and "growth" methodologies have become chains rather than enablers, with PMs spending more time following their rules than remembering why these frameworks exist in the first place.
 
-Brian Chesky recently captured this tension perfectly when he said "Technology might as well be a synonym for 'change'. We are in the change industry." He contrasted this with Tim Cook's tenure at Apple – excellent at scaling the iPhone, but not at creating transformative change. This distinction cuts to the heart of what's wrong with product management today.
+Brian Chesky (CEO of Airbnb) recently captured this tension perfectly [on an episode of Decoder with Nilay Patel](https://www.theverge.com/24279570/airbnb-ceo-brian-chesky-founder-mode-apple-steve-jobs-management-decoder-podcast-2024)
+> Technology might as well be a synonym for 'change'. We are in the change industry.
+He contrasted this with Tim Cook's tenure at Apple – excellent at scaling the iPhone, but not at creating transformative change. This distinction cuts to the heart of what's wrong with product management today.
 
-We've become Tim Cooks in a world that needs Brian Cheskys. We've mastered the art of optimization and process, but lost sight of our real purpose: driving meaningful change through technology. Product managers should be agents of transformation, not custodians of the status quo. Instead, we've built careers around optimizing what exists rather than imagining what could be.
+We've mastered the art of optimization and process, but lost sight of our real purpose: driving meaningful change through technology. Product managers should be agents of transformation, not custodians of the status quo. Instead, we've built careers around optimizing what exists rather than imagining what could be.
 
 ## Why Product Managers Exist
 
@@ -61,53 +65,33 @@ When we lose sight of these fundamental purposes, we become process managers ins
 - Start creating experiences people love
 - Make products so good people can't imagine going back
 
-## What This Looks Like in Practice
+## Making Change Happen
 
-### Embracing Emerging Technology
-- Stay ahead of technological trends
-- Experiment with new possibilities
-- Find novel applications for emerging tech
+The path from process optimizer to transformation agent isn't about frameworks or methodologies. It's about changing how we think and act every day. Here's how to start:
 
-### Building for Delight
-- Focus on user joy, not just user needs
-- Create experiences that surprise and delight
-- Make the complex feel effortless
+1. **Cultivate Deep Curiosity**
+   - Talk to users and customers through real conversations, not just surveys
+   - Immerse yourself in your market and technology landscape
+   - Read voraciously about adjacent industries and technologies
+   - Study emerging trends and their potential impacts
 
-### Accelerating Business Success
-- Think 10 steps ahead of the market
-- Create new opportunities, don't just capture existing ones
-- Drive transformation, not just optimization
+2. **Build More, Process Less**
+   - Spend more time creating, less time documenting
+   - Experiment with emerging technologies and AI tools
+   - Build side projects to stay sharp and explore new possibilities
+   - Share and test ideas early and often
 
-## Making the Shift
+3. **Create Space for Innovation**
+   - Ruthlessly eliminate unnecessary meetings and processes
+   - Protect time for exploration and learning
+   - Make faster decisions with imperfect information
+   - Foster an environment that encourages experimentation
 
-For product managers ready to reclaim their role as agents of change:
-
-1. **Audit Your Time**
-   - How much time do you spend on process vs. building?
-   - Are you leading change or managing status quo?
-   - Where could you be taking bigger swings?
-
-2. **Shift Your Questions**
-   - Instead of "How can we improve this?"
-   ask "How could we reinvent this?"
-   - Instead of "What's the safe bet?"
-   ask "What's the bold bet?"
-   - Instead of "What's realistic?"
-   ask "What's possible?"
-
-3. **Change Your Impact**
-   - Move from managing metrics to driving transformation
-   - Focus on creating delight, not just satisfaction
-   - Build for exponential change, not incremental improvement
-
-## The Path Forward
-
-Product management needs to return to its roots as a driver of change while embracing its future as an accelerator of transformation. This means:
-
-- Being bold in our vision
-- Being ambitious in our execution
-- Being relentless in our pursuit of delight
-- Being fearless in our embrace of change
+4. **Drive Meaningful Change**
+   - Focus on transformative impact over process efficiency
+   - Pursue user delight, not just satisfaction
+   - Make bold bets on future opportunities
+   - Challenge fundamental assumptions about your product and market
 
 The future belongs to product managers who can drive outsized impact through technological change. Not by following processes or optimizing metrics, but by imagining better futures and having the courage to build them.
 
