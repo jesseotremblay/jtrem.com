@@ -22,7 +22,7 @@ It was ridiculously easy. I wish I had adopted Ghost years ago. Here is how I di
 
 **Step 2:** to each post added the canonical URL to use [Ghost's support for canonical URL's](https://ghost.org/changelog/canonical-urls/).
 
-**Step3:** I added this [#has handlebars helper](https://ghost.org/docs/themes/helpers/has/) within the loop that pulls my posts to my index page. This identifies which posts have canonical urls to display the correct link for each title type in the feed of posts on `index.hbs`.
+**Step3:** I added this [has handlebars helper](https://ghost.org/docs/themes/helpers/has/) within the loop that pulls my posts to my index page. This identifies which posts have canonical urls to display the correct link for each title type in the feed of posts on `index.hbs`.
 
     {{#has tag="link"}}
       <h1 class="post-title"><a href="{{canonical_url}}" style="text-decoration: underline #dfdfdf">{{title}}</a></h1>

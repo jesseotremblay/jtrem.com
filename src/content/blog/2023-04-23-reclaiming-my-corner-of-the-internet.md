@@ -5,7 +5,7 @@ title: Reclaiming My Corner of the Internet
 slug: "reclaiming-my-corner-of-the-internet"
 featured: false
 tags:
-  - open- web
+  - open-web
   - fediverse
   - self-hosting
 description: "As someone who makes a living by crafting seamless user experiences, my goal is to eliminate as much friction as possible. I want my customers to access my products with ease, not just for their satisfaction but also because it's smart business."
