@@ -24,6 +24,7 @@ const { href, className, ariaLabel, title, disabled = false } = Astro.props;
     <a
       {href}
       class={`group inline-block hover:text-skin-accent ${className}`}
+      rel="me"
       aria-label={ariaLabel}
       title={title}
     >
