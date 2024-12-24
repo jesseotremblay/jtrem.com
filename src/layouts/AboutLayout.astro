@@ -21,8 +21,6 @@ const { frontmatter } = Astro.props;
   <main id="main-content">
     <section id="about" class="prose mb-28 max-w-3xl prose-img:border-0">
       <h1 class="text-2xl tracking-wider sm:text-3xl">{frontmatter.title}</h1>
-      <img class="u-photo" src="/images/me.jpg" />
-      <p class="p-note">Product Director @ HubSpot</p>
       <slot />
     </section>
   </main>
