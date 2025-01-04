@@ -1,0 +1,63 @@
+{
+  "root": true,
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "plugins": ["@typescript-eslint"],
+  "overrides": [
+    {
+      "files": ["*.astro"],
+      "extends": ["plugin:astro/recommended"],
+      "parser": "astro-eslint-parser",
+      "parserOptions": {
+        "parser": "@typescript-eslint/parser",
+        "extraFileExtensions": [".astro"]
+      },
+      "rules": {
+        "react/jsx-key": "off",
+        "react/react-in-jsx-scope": "off"
+      }
+    },
+    {
+      "files": ["*.tsx", "*.jsx"],
+      "extends": [
+        "plugin:react/recommended",
+        "plugin:react/jsx-runtime"
+      ],
+      "parser": "@typescript-eslint/parser",
+      "parserOptions": {
+        "ecmaVersion": "latest",
+        "sourceType": "module",
+        "ecmaFeatures": {
+          "jsx": true
+        }
+      },
+      "rules": {
+        "react/prop-types": "off",
+        "react/display-name": "off"
+      }
+    },
+    {
+      "files": ["*.ts"],
+      "parser": "@typescript-eslint/parser",
+      "parserOptions": {
+        "ecmaVersion": "latest",
+        "sourceType": "module"
+      }
+    }
+  ],
+  "env": {
+    "browser": true,
+    "es2022": true,
+    "node": true
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "rules": {
+    "@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }]
+  }
+}

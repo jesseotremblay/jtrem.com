@@ -1,6 +1,7 @@
 .husky
 .vscode
-node_modules
+node_modules/
 public
-dist
+dist/
+.astro/
 .yarn

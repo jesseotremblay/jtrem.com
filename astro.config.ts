@@ -6,7 +6,6 @@ import remarkCollapse from "remark-collapse";
 import sitemap from "@astrojs/sitemap";
 import { SITE } from "./src/config";
 
-// https://astro.build/config
 export default defineConfig({
   site: SITE.website,
   integrations: [
@@ -34,6 +33,12 @@ export default defineConfig({
   vite: {
     optimizeDeps: {
       exclude: ["@resvg/resvg-js"],
+      include: [],
+    },
+    build: {
+      rollupOptions: {
+        external: ["@resvg/resvg-js"],
+      },
     },
   },
   scopedStyleStrategy: "where",

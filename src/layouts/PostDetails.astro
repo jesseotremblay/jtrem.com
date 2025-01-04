@@ -74,7 +74,7 @@ const layoutProps = {
       modDatetime={modDatetime}
       size="lg"
       className="my-2"
-      class="dt-published"
+      className="dt-published"
     />
     <article
       id="article"
@@ -85,7 +85,7 @@ const layoutProps = {
     </article>
 
     <ul class="my-8">
-      {tags.map(tag => <Tag tag={slugifyStr(tag)} />)}
+      {tags.map((tag: string) => <Tag tag={slugifyStr(tag)} />)}
     </ul>
 
     <div

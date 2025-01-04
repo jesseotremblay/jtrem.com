@@ -1,8 +1,11 @@
 {
-  "extends": "astro/tsconfigs/strict",
+  "extends": "astro/tsconfigs/strictest",
   "compilerOptions": {
     "baseUrl": "src",
     "jsx": "react-jsx",
+    "jsxImportSource": "react",
+    "types": ["astro/client"],
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "paths": {
       "@assets/*": ["assets/*"],
       "@config": ["config.ts"],
@@ -11,7 +14,9 @@
       "@layouts/*": ["layouts/*"],
       "@pages/*": ["pages/*"],
       "@styles/*": ["styles/*"],
-      "@utils/*": ["utils/*"],
-    },
+      "@utils/*": ["utils/*"]
+    }
   },
+  "include": ["src/**/*", ".eslintrc.json"],
+  "exclude": ["node_modules"]
 }
