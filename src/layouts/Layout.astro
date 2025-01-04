@@ -6,14 +6,14 @@ import { ViewTransitions } from "astro:transitions";
 const googleSiteVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
 
 export interface Props {
-  title?: string;
-  author?: string;
-  description?: string;
-  ogImage?: string;
-  canonicalURL?: string;
-  pubDatetime?: Date;
-  modDatetime?: Date | null;
-  scrollSmooth?: boolean;
+  title?: string | undefined;
+  author?: string | undefined;
+  description?: string | undefined;
+  ogImage?: string | undefined;
+  canonicalURL?: string | undefined;
+  pubDatetime?: Date | undefined;
+  modDatetime?: Date | null | undefined;
+  scrollSmooth?: boolean | undefined;
   children: any;
 }
 
