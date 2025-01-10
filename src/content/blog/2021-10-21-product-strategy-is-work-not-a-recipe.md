@@ -4,6 +4,7 @@ pubDatetime: 2021-10-21
 title: Product strategy is work, not a recipe
 slug: "product-strategy-is-work-not-a-recipe"
 featured: false
+draft: false
 tags:
   - product-strategy
   - product-management

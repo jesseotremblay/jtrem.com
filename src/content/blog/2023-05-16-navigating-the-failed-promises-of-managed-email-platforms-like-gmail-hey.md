@@ -4,6 +4,7 @@ pubDatetime: 2023-05-17
 title: Navigating the failed promises of managed email platforms
 slug: "navigating-the-failed-promises-of-managed-email-platforms"
 featured: false
+draft: false
 tags:
   - email
   - open-web

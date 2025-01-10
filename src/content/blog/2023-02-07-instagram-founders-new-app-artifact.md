@@ -4,6 +4,7 @@ pubDatetime: 2023-02-07
 title: Instagram Founder's New App, Artifact
 slug: "instagram-founders-new-app-artifact"
 featured: false
+draft: false
 tags:
   - link
   - Platforms

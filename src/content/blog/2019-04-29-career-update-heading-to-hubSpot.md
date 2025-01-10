@@ -4,6 +4,7 @@ pubDatetime: 2019-04-29
 title: Career Update, Heading to HubSpot
 slug: "career-update-heading-to-hubSpot"
 featured: false
+draft: false
 tags:
   - personal
   - product-management

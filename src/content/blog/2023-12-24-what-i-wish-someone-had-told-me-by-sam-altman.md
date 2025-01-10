@@ -4,6 +4,7 @@ pubDatetime: 2023-12-24
 title: What I Wish Someone Had Told Me, by Sam Altman
 slug: "what-i-wish-someone-had-told-me-by-sam-altman"
 featured: false
+draft: false
 tags:
   - link
 description: "Compounding exponentials are magic. In particular, you really want to build a business that gets a compounding advantage with scale."

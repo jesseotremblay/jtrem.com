@@ -4,6 +4,7 @@ pubDatetime: 2023-10-04
 title: TootBoost - As a startup founder...
 slug: "tootboost-as-a-startup-founder"
 featured: false
+draft: false
 tags:
   - link
   - product
@@ -35,6 +36,4 @@ Justin Jackson (@mijustin@mastodon.social)
 
 As a startup founder, there are a ton of variables you can’t control. Here’s what you can control: 1. The product category you choose (⚠️ important) 2. How you differentiate your product competitively 3. Efficiency and effectiveness of your marketing 4. Your skills, network, resources, experiences…
 
-![](https://mastodon.social/packs/media/icons/apple-touch-icon-180x180-a75559a0af48064c1b7c71b81f3bf7c6.png)Mastodon
-
-](https://mastodon.social/@mijustin/111178478693855599)
+[Mastodon](https://mastodon.social/@mijustin/111178478693855599)

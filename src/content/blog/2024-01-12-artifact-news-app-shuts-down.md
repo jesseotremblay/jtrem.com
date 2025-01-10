@@ -4,7 +4,7 @@ pubDatetime: 2024-01-13
 title: Artifact News App Shuts Down
 slug: "artifact-news-app-shuts-down"
 featured: false
-draft: true
+draft: false
 tags:
   - link
   - Platforms

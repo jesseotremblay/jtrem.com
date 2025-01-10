@@ -4,6 +4,7 @@ pubDatetime: 2023-09-03
 title: Context collapse with Beeper
 slug: "context-collapse-with-beeper"
 featured: false
+draft: false
 tags:
   - open-web
   - fediverse

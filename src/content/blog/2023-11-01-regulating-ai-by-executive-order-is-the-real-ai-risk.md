@@ -4,6 +4,7 @@ pubDatetime: 2023-11-02
 title: Regulating AI by Executive Order is the Real AI Risk
 slug: "regulating-ai-by-executive-order-is-the-real-ai-risk"
 featured: false
+draft: false
 tags:
   - ai
   - link

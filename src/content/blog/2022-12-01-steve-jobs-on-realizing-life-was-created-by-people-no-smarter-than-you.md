@@ -4,6 +4,7 @@ pubDatetime: 2022-12-01
 title: Steve Jobs on Realizing Life Was Created By People No Smarter Than You
 slug: "steve-jobs-on-realizing-life-was-created-by-people-no-smarter-than-you"
 featured: false
+draft: false
 tags:
   - apple
   - life

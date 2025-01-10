@@ -4,6 +4,7 @@ pubDatetime: 2023-10-28
 title: Google agrees to invest up to $2 billion in OpenAI rival Anthropic
 slug: "google-agrees-to-invest-up-to-2-billion-in-openai-rival-anthropic"
 featured: false
+draft: false
 tags:
   - ai
   - link

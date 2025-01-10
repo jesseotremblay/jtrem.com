@@ -4,12 +4,14 @@ pubDatetime: 2015-10-01
 title: Career Update, Joining Hudl
 slug: "2015-10-01-career-update-joining-hudl"
 featured: false
+draft: false
 tags:
   - personal
   - product-management
   - career
 description: "I am thrilled to announce that I am joining Hudl as a Product Manager in a few weeks. This decision excites me deeply, and I can't wait to share why this role feels like a perfect fit for me."
 ---
+
 I am thrilled to announce that I am joining Hudl as a Product Manager in a few weeks. This decision excites me deeply, and I can't wait to share why this role feels like a perfect fit for me.
 
 For many years, soccer has been a central part of my life. From playing the game, being a fan, to coaching, soccer has always been more than just a sport; it's a passion. My journey even led me to start a non-profit club team in Central Mass several years ago with a friend, a project that brought together dedicated young athletes and their supportive families who didn't have the means in the current pay-to-play American soccer environment. This experience has given me a firsthand understanding of the challenges and triumphs that come with youth sports.

@@ -4,6 +4,7 @@ pubDatetime: 2023-12-03
 title: Braun - Designed to Keep by Klaus Kemp
 slug: "braun-designed-to-keep-by"
 featured: false
+draft: true
 tags:
   - products
   - design

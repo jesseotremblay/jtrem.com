@@ -4,6 +4,7 @@ pubDatetime: 2023-08-01
 title: (temp) Migrating to Self-hosted Ghost
 slug: "migrating-to-self-hosted-ghost"
 featured: false
+draft: false
 tags:
   - self-hosting
 description: "I'm migrating my CMS to a self-hosted Ghost.org instance. I'll eventually migrate over the two decades worth of irreverent & sporadic content. Most of it was garbage anyways."

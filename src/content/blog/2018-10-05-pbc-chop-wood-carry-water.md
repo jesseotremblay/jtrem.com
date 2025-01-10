@@ -4,6 +4,7 @@ pubDatetime: 2018-10-05
 title: Product Book Club - Chop Wood Carry Water
 slug: "pbc-chop-wood-carry-water"
 featured: false
+draft: false
 tags:
   - product-book-club
   - product-craft

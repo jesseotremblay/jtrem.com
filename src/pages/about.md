@@ -16,7 +16,7 @@ Check out my [professional background](/resume) or download my resume ([.docx](.
 
 Jtrem.com is a personal website (re)launched in 2013 by Jesse Tremblay.
 
-This version of the site was made with [Astro](https://astro.build) and deployed with [Netlify](https://netflify). I've trimmed it back to a simple static-site so that I can keep it lightweight, fast and focus on content.
+This version of the site was made with [Astro](https://astro.build) and deployed with [Netlify](https://netflify). It'a current design is using the [Astro Paper](https://astro-paper.pages.dev/) template. I've trimmed it back to a simple static-site so that I can keep it lightweight, fast and focus on content.
 
 ### Essential Tools:
 

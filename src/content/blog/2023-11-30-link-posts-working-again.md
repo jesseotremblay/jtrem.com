@@ -4,6 +4,7 @@ pubDatetime: 2023-11-30
 title: Link Posts Working, Again
 slug: "link-posts-working-again"
 featured: false
+draft: true
 tags:
   - self-hosting
   - micropost

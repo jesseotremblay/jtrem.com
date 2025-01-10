@@ -4,6 +4,7 @@ pubDatetime: 2023-04-23
 title: Reclaiming My Corner of the Internet
 slug: "reclaiming-my-corner-of-the-internet"
 featured: false
+draft: false
 tags:
   - open-web
   - fediverse
