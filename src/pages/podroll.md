@@ -2,8 +2,10 @@
 layout: ../layouts/PodrollLayout.astro
 title: "Podroll"
 slug: podroll
-date_published: 2013-01-01T19:31:00.000Z
-date_updated: 2025-01-04T01:03:21.000Z
+date_published: 2013-01-01
+date_updated: 2025-02-12
 ---
 
-I need to add the list, but here is a link to download <a href="../jesses-essential-podcasts.opml" download>OPML</a> file.
+this is a mess, so I'm remodeling...
+
+ <a href="../jesses-essential-podcasts.opml" download>OPML</a> file.

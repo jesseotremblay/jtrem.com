@@ -4,7 +4,7 @@ import Hr from "./Hr.astro";
 import LinkButton from "./LinkButton.astro";
 
 export interface Props {
-  activeNav?: "posts" | "tags" | "about" | "blogroll" | "podroll" | "search";
+  activeNav?: "posts" | "about" | "tags" | "search";
 }
 
 const { activeNav } = Astro.props;
@@ -61,26 +61,13 @@ const { activeNav } = Astro.props;
             </a>
           </li>
           <li>
-            <a href="/tags/" class={activeNav === "tags" ? "active" : ""}>
-              Tags
-            </a>
-          </li>
-          <li>
             <a href="/about/" class={activeNav === "about" ? "active" : ""}>
               About
             </a>
           </li>
           <li>
-            <a
-              href="/blogroll/"
-              class={activeNav === "blogroll" ? "active" : ""}
-            >
-              Blogroll
-            </a>
-          </li>
-          <li>
-            <a href="/podroll/" class={activeNav === "podroll" ? "active" : ""}>
-              Podroll
+            <a href="/tags/" class={activeNav === "tags" ? "active" : ""}>
+              Tags
             </a>
           </li>
           <li>

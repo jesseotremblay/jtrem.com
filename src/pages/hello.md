@@ -1,23 +1,19 @@
 ---
-layout: ../layouts/AboutLayout.astro
-title: "About Me"
-slug: about
+layout: ../layouts/OtherPagesLayout.astro
+title: "Hello"
+slug: hello
 date_published: 2013-01-01T19:31:00.000Z
 date_updated: 2024-04-27T01:03:21.000Z
 ---
+*Updated: Feburary 12th, 2025*
 
-### Hi 👋, I'm Jesse
+### Hi 👋, here is how I prefer to keep in touch, and why:
+- Writing: [jtrem.com](https://jtrem.com) *I mainly write on this website*
+- Email: [contact@jtrem.com](mailto:contact@jtrem.com) *This is an alias, but feel free to reach out. Would love to hear from you.*
+- LinkedIn: [jesseotremblay](https://www.linkedin.com/in/jesseotremblay/) *I don't use it for ongoing communication, I'd rather email.*
+- Bluesky: [@jtrem.com](https://bsky.app/profile/jtrem.com) *It's...fine. Less hatefilled than Twitter. Less clunky than Mastodon. Still stupid, so I don't engage on it much.*
+- Mastodon: [@jtrem@jtrem.me](https://jtrem.me/@jesse) *I check this less and less. The service is so clunky and few people I care to follow engage on it regualrly. So, I rarely check and engage.*
+- Twitter: [@iamjtrem](https://twitter.com/iamjtrem) *I don't engage on it. Mainly use it to see what insane things are happening.*
+- Threads: [@iamjtrem](https://www.threads.net/@iamjtrem) *I don't engage on it and almost never check it.*
 
-Here is how I prefer to keep in touch, and why:
-
-- My favourite way to converse is [email](mailto:contact@jtrem.com).
-- I mainly write on my website. To see what I'm focusing on, I have a now page.
-- I use Substack to share my newsletter
-- I have left Twitter or "X" and am glad to avoid it's hateful atmosphere
-- I dislike LinkedIn as a platform, but use it to connect with work colleagues, and to keep an eye on the job market. I don't use it for ongoing communication, I'd rather email.
-- I do use Instagram, but only on occasion, to connect with close friends and colleagues.
-- I do not use Facebook or Threads.
-- I am dabbling with BlueSky, we'll see if it's a keeper.
-  This is an example of a Hello page. If you would like to make your own to encourage better communication, and share it with me, I would be happy to link to it.
-
-Updated: January 3rd, 2024
+To see what I'm focusing on, I have a [now page](https://jtrem.com/now).

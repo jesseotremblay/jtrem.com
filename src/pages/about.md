@@ -1,7 +1,7 @@
 ---
 layout: ../layouts/AboutLayout.astro
-title: "Hello"
-slug: hello
+title: "About Me"
+slug: about
 date_published: 2013-01-01T19:31:00.000Z
 date_updated: 2024-04-27T01:03:21.000Z
 ---
@@ -9,6 +9,8 @@ date_updated: 2024-04-27T01:03:21.000Z
 ### Hi 👋, I'm Jesse
 
 I'm a Product Leader who was born & raised in New England and currently lives near Boston. My brother & I started hacking websites together – and getting paid too much money for them – back in the 90's. I've been hooked on creating stuff on the internet ever since. Now I do my best to make great software products that improve people's lives.
+
+If you want to reach out, [go here](http://jtrem.com/hello) to see the various places I hangout on the internet.
 
 Check out my [professional background](/resume) or download my resume ([.docx](../jesse-resume.docx), [.pdf](../jesse-resume.pdf), [.md](../jesse-resume.md))
 
