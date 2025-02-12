@@ -139,6 +139,12 @@ export const SOCIALS: SocialObjects = [
     active: true,
   },
   {
+    name: "Bluesky",
+    href: "https://bsky.app/profile/jtrem.com",
+    linkTitle: `${SITE.title} on Bluesky`,
+    active: true,
+  },
+  {
     name: "Mail",
     href: "mailto:contact@jtrem.com",
     linkTitle: `Send an email to ${SITE.title}`,
