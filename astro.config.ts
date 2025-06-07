@@ -29,6 +29,17 @@ export default defineConfig({
       theme: "one-dark-pro",
       wrap: true,
     },
+    rehypePlugins: [
+      [
+        "rehype-img-size",
+        {
+          dir: "public",
+        },
+      ],
+      [
+        "rehype-plugin-image-native-lazy-loading",
+      ],
+    ],
   },
   vite: {
     optimizeDeps: {
