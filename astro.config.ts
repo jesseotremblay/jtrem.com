@@ -36,9 +36,7 @@ export default defineConfig({
           dir: "public",
         },
       ],
-      [
-        "rehype-plugin-image-native-lazy-loading",
-      ],
+      "rehype-plugin-image-native-lazy-loading",
     ],
   },
   vite: {
