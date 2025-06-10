@@ -1,0 +1,765 @@
+---
+export interface Props {
+  url: string;
+  title?: string;
+}
+
+const { url, title = "Webmentions" } = Astro.props;
+---
+
+<section class="webmentions" data-url={url}>
+  <h3 class="webmentions-title">
+    {title} <span class="webmentions-count">(0)</span>
+  </h3>
+  
+  <div class="webmentions-loading">
+    <div class="loading-spinner"></div>
+    <span>Loading interactions...</span>
+  </div>
+  
+  <div class="webmentions-content" style="display: none;">
+    <!-- Summary counts -->
+    <div class="webmentions-summary" style="display: none;">
+      <span class="summary-item likes-summary" style="display: none;">
+        <span class="summary-emoji">❤️</span>
+        <span class="summary-count">0</span>
+        <span class="summary-label">likes</span>
+      </span>
+      
+      <span class="summary-item reposts-summary" style="display: none;">
+        <span class="summary-emoji">🔄</span>
+        <span class="summary-count">0</span>
+        <span class="summary-label">reposts</span>
+      </span>
+    </div>
+
+    <!-- Replies -->
+    <div class="webmentions-section replies-section" style="display: none;">
+      <h4 class="section-title">Replies</h4>
+      <div class="webmentions-list replies-list"></div>
+    </div>
+
+    <!-- Mentions -->
+    <div class="webmentions-section mentions-section" style="display: none;">
+      <h4 class="section-title">Mentions</h4>
+      <div class="webmentions-list mentions-list"></div>
+    </div>
+
+    <!-- Facepile for likes and reposts -->
+    <div class="webmentions-section interactions-section" style="display: none;">
+      <h4 class="section-title">Interactions</h4>
+      
+      <div class="facepile-container">
+        <div class="facepile-group likes-facepile" style="display: none;">
+          <span class="facepile-label">❤️ Liked by:</span>
+          <div class="facepile"></div>
+        </div>
+        
+        <div class="facepile-group reposts-facepile" style="display: none;">
+          <span class="facepile-label">🔄 Reposted by:</span>
+          <div class="facepile"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="webmentions-empty" style="display: none;">
+    <p>No interactions yet. Be the first to share this post on social media!</p>
+  </div>
+
+  <div class="webmentions-error" style="display: none;">
+    <p>Unable to load interactions. Please try again later.</p>
+  </div>
+</section>
+
+<style>
+  .webmentions {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    border: 1px solid var(--color-border, #e5e7eb);
+    border-radius: 0.5rem;
+    background: var(--color-bg-secondary, #f8f9fa);
+  }
+
+  .webmentions-title {
+    margin: 0 0 1rem 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-text, #1f2937);
+  }
+
+  .webmentions-count {
+    color: var(--color-text-secondary, #6b7280);
+    font-weight: normal;
+  }
+
+  .webmentions-loading {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 2rem 0;
+    color: var(--color-text-secondary, #6b7280);
+    justify-content: center;
+  }
+
+  .loading-spinner {
+    width: 1.5rem;
+    height: 1.5rem;
+    border: 2px solid var(--color-border, #e5e7eb);
+    border-top: 2px solid var(--color-accent, #3b82f6);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  .webmentions-summary {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding: 0.75rem;
+    background: var(--color-bg, white);
+    border-radius: 0.375rem;
+    border: 1px solid var(--color-border, #e5e7eb);
+  }
+
+  .summary-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+  }
+
+  .summary-emoji {
+    font-size: 1rem;
+  }
+
+  .summary-count {
+    font-weight: 600;
+    color: var(--color-accent, #3b82f6);
+  }
+
+  .summary-label {
+    color: var(--color-text-secondary, #6b7280);
+  }
+
+  .webmentions-section {
+    margin-bottom: 1.5rem;
+  }
+
+  .webmentions-section:last-child {
+    margin-bottom: 0;
+  }
+
+  .section-title {
+    margin: 0 0 1rem 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-text, #1f2937);
+  }
+
+  .webmentions-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .webmention {
+    padding: 1rem;
+    background: var(--color-bg, white);
+    border: 1px solid var(--color-border, #e5e7eb);
+    border-radius: 0.375rem;
+  }
+
+  .webmention-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+  }
+
+  .webmention-author {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: var(--color-text, #1f2937);
+  }
+
+  .webmention-author:hover {
+    color: var(--color-accent, #3b82f6);
+  }
+
+  .webmention-avatar {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .webmention-name {
+    font-weight: 500;
+    font-size: 0.875rem;
+  }
+
+  .webmention-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    color: var(--color-text-secondary, #6b7280);
+  }
+
+  .webmention-platform {
+    font-size: 0.875rem;
+  }
+
+  .webmention-date {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .webmention-date:hover {
+    color: var(--color-accent, #3b82f6);
+  }
+
+  .webmention-content {
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: var(--color-text, #1f2937);
+  }
+
+  .webmention-content p {
+    margin: 0;
+  }
+
+  .webmention-content a {
+    color: var(--color-accent, #3b82f6);
+    text-decoration: none;
+  }
+
+  .webmention-content a:hover {
+    text-decoration: underline;
+  }
+
+  .facepile-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .facepile-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .facepile-label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-text, #1f2937);
+  }
+
+  .facepile {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    align-items: center;
+  }
+
+  .facepile-avatar {
+    display: block;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid var(--color-bg, white);
+    transition: transform 0.2s ease;
+  }
+
+  .facepile-avatar:hover {
+    transform: scale(1.1);
+    z-index: 1;
+  }
+
+  .facepile-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .facepile-more {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background: var(--color-bg-tertiary, #e5e7eb);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--color-text-secondary, #6b7280);
+  }
+
+  .webmentions-empty {
+    text-align: center;
+    padding: 2rem 0;
+    color: var(--color-text-secondary, #6b7280);
+  }
+
+  .webmentions-error {
+    text-align: center;
+    padding: 2rem 0;
+    color: var(--color-error, #dc2626);
+  }
+
+  /* Dark mode support */
+  @media (prefers-color-scheme: dark) {
+    .webmentions {
+      background: var(--color-bg-secondary-dark, #1f2937);
+      border-color: var(--color-border-dark, #374151);
+    }
+
+    .webmentions-summary,
+    .webmention {
+      background: var(--color-bg-dark, #111827);
+      border-color: var(--color-border-dark, #374151);
+    }
+
+    .webmentions-title,
+    .section-title,
+    .webmention-name,
+    .webmention-content,
+    .facepile-label {
+      color: var(--color-text-dark, #f9fafb);
+    }
+
+    .summary-label,
+    .webmention-meta,
+    .webmentions-count {
+      color: var(--color-text-secondary-dark, #9ca3af);
+    }
+
+    .summary-count {
+      color: var(--color-accent-dark, #60a5fa);
+    }
+
+    .facepile-more {
+      background: var(--color-bg-tertiary-dark, #374151);
+      color: var(--color-text-secondary-dark, #9ca3af);
+    }
+
+    .loading-spinner {
+      border-color: var(--color-border-dark, #374151);
+      border-top-color: var(--color-accent-dark, #60a5fa);
+    }
+  }
+
+  /* Responsive design */
+  @media (max-width: 640px) {
+    .webmentions {
+      margin: 1.5rem 0;
+      padding: 1rem;
+    }
+
+    .webmention-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .webmention-meta {
+      align-self: flex-end;
+    }
+
+    .facepile-container {
+      gap: 0.75rem;
+    }
+  }
+</style>
+
+<script is:inline>
+  // WebMentions Dynamic Loading
+  class WebMentionsDynamic {
+    constructor(element) {
+      this.element = element;
+      this.url = element.dataset.url;
+      this.cache = new Map();
+      this.init();
+    }
+
+    async init() {
+      try {
+        const webmentions = await this.fetchWebMentions();
+        this.renderWebMentions(webmentions);
+      } catch (error) {
+        console.error('Error loading webmentions:', error);
+        this.showError();
+      }
+    }
+
+    async fetchWebMentions() {
+      // Check cache first
+      if (this.cache.has(this.url)) {
+        return this.cache.get(this.url);
+      }
+
+      const apiUrl = `https://webmention.io/api/mentions.jf2?target=${encodeURIComponent(this.url)}&per-page=100`;
+      const response = await fetch(apiUrl);
+      
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+      
+      const data = await response.json();
+      const webmentions = data.children || [];
+      
+      // Cache the result for 5 minutes
+      this.cache.set(this.url, webmentions);
+      setTimeout(() => this.cache.delete(this.url), 5 * 60 * 1000);
+      
+      return webmentions;
+    }
+
+    renderWebMentions(webmentions) {
+      this.hideLoading();
+      
+      if (webmentions.length === 0) {
+        this.showEmpty();
+        return;
+      }
+
+      const grouped = this.groupWebMentions(webmentions);
+      const counts = this.getWebMentionCounts(grouped);
+      
+      this.updateCounts(counts);
+      this.renderSummary(counts);
+      this.renderReplies(grouped.replies);
+      this.renderMentions(grouped.mentions);
+      this.renderFacepiles(grouped.likes, grouped.reposts);
+      
+      this.showContent();
+    }
+
+    groupWebMentions(webmentions) {
+      const grouped = {
+        likes: [],
+        reposts: [],
+        replies: [],
+        mentions: []
+      };
+
+      webmentions.forEach(mention => {
+        switch (mention['wm-property']) {
+          case 'like-of':
+            grouped.likes.push(mention);
+            break;
+          case 'repost-of':
+            grouped.reposts.push(mention);
+            break;
+          case 'in-reply-to':
+            grouped.replies.push(mention);
+            break;
+          case 'mention-of':
+            grouped.mentions.push(mention);
+            break;
+        }
+      });
+
+      // Sort by date (newest first)
+      Object.keys(grouped).forEach(key => {
+        grouped[key].sort((a, b) => 
+          new Date(b.published || b.wm_received).getTime() - 
+          new Date(a.published || a.wm_received).getTime()
+        );
+      });
+
+      return grouped;
+    }
+
+    getWebMentionCounts(grouped) {
+      return {
+        likes: grouped.likes.length,
+        reposts: grouped.reposts.length,
+        replies: grouped.replies.length,
+        mentions: grouped.mentions.length,
+        total: grouped.likes.length + grouped.reposts.length + grouped.replies.length + grouped.mentions.length
+      };
+    }
+
+    updateCounts(counts) {
+      const countElement = this.element.querySelector('.webmentions-count');
+      if (countElement) {
+        countElement.textContent = `(${counts.total})`;
+      }
+    }
+
+    renderSummary(counts) {
+      const summaryElement = this.element.querySelector('.webmentions-summary');
+      const likesElement = this.element.querySelector('.likes-summary');
+      const repostsElement = this.element.querySelector('.reposts-summary');
+
+      if (counts.likes > 0 || counts.reposts > 0) {
+        if (counts.likes > 0) {
+          likesElement.querySelector('.summary-count').textContent = counts.likes;
+          likesElement.querySelector('.summary-label').textContent = counts.likes === 1 ? 'like' : 'likes';
+          likesElement.style.display = 'flex';
+        }
+        
+        if (counts.reposts > 0) {
+          repostsElement.querySelector('.summary-count').textContent = counts.reposts;
+          repostsElement.querySelector('.summary-label').textContent = counts.reposts === 1 ? 'repost' : 'reposts';
+          repostsElement.style.display = 'flex';
+        }
+        
+        summaryElement.style.display = 'flex';
+      }
+    }
+
+    renderReplies(replies) {
+      if (replies.length === 0) return;
+      
+      const section = this.element.querySelector('.replies-section');
+      const list = this.element.querySelector('.replies-list');
+      const title = section.querySelector('.section-title');
+      
+      title.textContent = `Replies (${replies.length})`;
+      
+      replies.forEach(reply => {
+        const element = this.createMentionElement(reply);
+        list.appendChild(element);
+      });
+      
+      section.style.display = 'block';
+    }
+
+    renderMentions(mentions) {
+      if (mentions.length === 0) return;
+      
+      const section = this.element.querySelector('.mentions-section');
+      const list = this.element.querySelector('.mentions-list');
+      const title = section.querySelector('.section-title');
+      
+      title.textContent = `Mentions (${mentions.length})`;
+      
+      mentions.forEach(mention => {
+        const element = this.createMentionElement(mention);
+        list.appendChild(element);
+      });
+      
+      section.style.display = 'block';
+    }
+
+    renderFacepiles(likes, reposts) {
+      if (likes.length === 0 && reposts.length === 0) return;
+      
+      const section = this.element.querySelector('.interactions-section');
+      
+      if (likes.length > 0) {
+        this.renderFacepile('.likes-facepile', likes);
+      }
+      
+      if (reposts.length > 0) {
+        this.renderFacepile('.reposts-facepile', reposts);
+      }
+      
+      section.style.display = 'block';
+    }
+
+    renderFacepile(selector, mentions) {
+      const group = this.element.querySelector(selector);
+      const facepile = group.querySelector('.facepile');
+      
+      mentions.slice(0, 12).forEach(mention => {
+        const avatar = this.createAvatarElement(mention);
+        facepile.appendChild(avatar);
+      });
+      
+      if (mentions.length > 12) {
+        const more = document.createElement('span');
+        more.className = 'facepile-more';
+        more.textContent = `+${mentions.length - 12}`;
+        facepile.appendChild(more);
+      }
+      
+      group.style.display = 'flex';
+    }
+
+    createMentionElement(mention) {
+      const article = document.createElement('article');
+      article.className = 'webmention';
+      
+      const header = document.createElement('div');
+      header.className = 'webmention-header';
+      
+      const author = document.createElement('a');
+      author.className = 'webmention-author';
+      author.href = mention.author?.url || '#';
+      author.target = '_blank';
+      author.rel = 'noopener noreferrer';
+      
+      const avatar = document.createElement('img');
+      avatar.className = 'webmention-avatar';
+      avatar.src = mention.author?.photo || '/default-avatar.png';
+      avatar.alt = mention.author?.name || 'Anonymous';
+      avatar.loading = 'lazy';
+      
+      const name = document.createElement('span');
+      name.className = 'webmention-name';
+      name.textContent = mention.author?.name || 'Anonymous';
+      
+      author.appendChild(avatar);
+      author.appendChild(name);
+      
+      const meta = document.createElement('div');
+      meta.className = 'webmention-meta';
+      
+      const platform = document.createElement('span');
+      platform.className = 'webmention-platform';
+      platform.textContent = this.getPlatformEmoji(mention);
+      platform.title = this.getPlatformName(mention);
+      
+      const date = document.createElement('a');
+      date.className = 'webmention-date';
+      date.href = mention.url || '#';
+      date.target = '_blank';
+      date.rel = 'noopener noreferrer';
+      date.textContent = this.formatDate(mention.published || mention.wm_received);
+      date.title = new Date(mention.published || mention.wm_received || Date.now()).toLocaleString();
+      
+      meta.appendChild(platform);
+      meta.appendChild(date);
+      
+      header.appendChild(author);
+      header.appendChild(meta);
+      article.appendChild(header);
+      
+      if (mention.content) {
+        const content = document.createElement('div');
+        content.className = 'webmention-content';
+        content.innerHTML = this.sanitizeHTML(mention.content.html || mention.content.text);
+        article.appendChild(content);
+      }
+      
+      return article;
+    }
+
+    createAvatarElement(mention) {
+      const link = document.createElement('a');
+      link.className = 'facepile-avatar';
+      link.href = mention.author?.url || '#';
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      link.title = `${mention.author?.name || 'Anonymous'} (${this.getPlatformName(mention)})`;
+      
+      const img = document.createElement('img');
+      img.src = mention.author?.photo || '/default-avatar.png';
+      img.alt = mention.author?.name || 'Anonymous';
+      img.loading = 'lazy';
+      
+      link.appendChild(img);
+      return link;
+    }
+
+    getPlatformEmoji(mention) {
+      if (this.isFromPlatform(mention, 'bluesky')) return '🦋';
+      if (this.isFromPlatform(mention, 'mastodon')) return '🐘';
+      if (this.isFromPlatform(mention, 'twitter')) return '🐦';
+      return '💬';
+    }
+
+    getPlatformName(mention) {
+      if (this.isFromPlatform(mention, 'bluesky')) return 'Bluesky';
+      if (this.isFromPlatform(mention, 'mastodon')) return 'Mastodon';
+      if (this.isFromPlatform(mention, 'twitter')) return 'Twitter';
+      return 'Web';
+    }
+
+    isFromPlatform(mention, platform) {
+      const source = mention.wm_source?.toLowerCase() || '';
+      const authorUrl = mention.author?.url?.toLowerCase() || '';
+      
+      switch (platform) {
+        case 'mastodon':
+          return source.includes('/@') || source.includes('/users/') || authorUrl.includes('/@');
+        case 'bluesky':
+          return source.includes('bsky.app') || authorUrl.includes('bsky.app');
+        case 'twitter':
+          return source.includes('twitter.com') || source.includes('x.com') || 
+                 authorUrl.includes('twitter.com') || authorUrl.includes('x.com');
+        default:
+          return false;
+      }
+    }
+
+    formatDate(dateString) {
+      const date = new Date(dateString);
+      const now = new Date();
+      const diffInSeconds = Math.floor((now.getTime() - date.getTime()) / 1000);
+      
+      if (diffInSeconds < 60) return 'just now';
+      if (diffInSeconds < 3600) return `${Math.floor(diffInSeconds / 60)}m ago`;
+      if (diffInSeconds < 86400) return `${Math.floor(diffInSeconds / 3600)}h ago`;
+      if (diffInSeconds < 604800) return `${Math.floor(diffInSeconds / 86400)}d ago`;
+      
+      return date.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+      });
+    }
+
+    sanitizeHTML(html) {
+      // Basic HTML sanitization
+      return html
+        .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
+        .replace(/on\w+="[^"]*"/g, '')
+        .replace(/javascript:/gi, '');
+    }
+
+    hideLoading() {
+      const loading = this.element.querySelector('.webmentions-loading');
+      if (loading) loading.style.display = 'none';
+    }
+
+    showContent() {
+      const content = this.element.querySelector('.webmentions-content');
+      if (content) content.style.display = 'block';
+    }
+
+    showEmpty() {
+      const empty = this.element.querySelector('.webmentions-empty');
+      if (empty) empty.style.display = 'block';
+    }
+
+    showError() {
+      this.hideLoading();
+      const error = this.element.querySelector('.webmentions-error');
+      if (error) error.style.display = 'block';
+    }
+  }
+
+  // Initialize all webmentions components when DOM is ready
+  function initWebMentions() {
+    const webmentionsElements = document.querySelectorAll('.webmentions[data-url]');
+    webmentionsElements.forEach(element => {
+      if (!element.hasAttribute('data-initialized')) {
+        element.setAttribute('data-initialized', 'true');
+        new WebMentionsDynamic(element);
+      }
+    });
+  }
+
+  // Initialize on DOM ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initWebMentions);
+  } else {
+    initWebMentions();
+  }
+
+  // Handle view transitions (for Astro transitions)
+  document.addEventListener('astro:page-load', initWebMentions);
+</script>

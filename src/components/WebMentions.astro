@@ -1,0 +1,493 @@
+---
+import { fetchWebMentionsWithCache, groupWebMentions, getWebMentionCounts, formatWebMentionDate, sanitizeHTML, truncateText, isFromPlatform } from "@utils/webmentions";
+import type { WebMention } from "@utils/webmentions";
+
+export interface Props {
+  url: string;
+  title?: string;
+}
+
+const { url, title = "Webmentions" } = Astro.props;
+
+// Fetch webmentions for this URL
+const webmentions = await fetchWebMentionsWithCache(url);
+const grouped = groupWebMentions(webmentions);
+const counts = getWebMentionCounts(webmentions);
+
+function getPlatformEmoji(mention: WebMention): string {
+  if (!mention) return '💬';
+  if (isFromPlatform(mention, 'bluesky')) return '🦋';
+  if (isFromPlatform(mention, 'mastodon')) return '🐘';
+  if (isFromPlatform(mention, 'twitter')) return '🐦';
+  return '💬';
+}
+
+function getPlatformName(mention: WebMention): string {
+  if (!mention) return 'Web';
+  if (isFromPlatform(mention, 'bluesky')) return 'Bluesky';
+  if (isFromPlatform(mention, 'mastodon')) return 'Mastodon';
+  if (isFromPlatform(mention, 'twitter')) return 'Twitter';
+  return 'Web';
+}
+---
+
+{webmentions.length > 0 && (
+  <section class="webmentions">
+    <h3 class="webmentions-title">
+      {title} ({counts.total})
+    </h3>
+    
+    <!-- Summary counts -->
+    {(counts.likes > 0 || counts.reposts > 0) && (
+      <div class="webmentions-summary">
+        {counts.likes > 0 && (
+          <span class="summary-item">
+            <span class="summary-emoji">❤️</span>
+            <span class="summary-count">{counts.likes}</span>
+            <span class="summary-label">{counts.likes === 1 ? 'like' : 'likes'}</span>
+          </span>
+        )}
+        
+        {counts.reposts > 0 && (
+          <span class="summary-item">
+            <span class="summary-emoji">🔄</span>
+            <span class="summary-count">{counts.reposts}</span>
+            <span class="summary-label">{counts.reposts === 1 ? 'repost' : 'reposts'}</span>
+          </span>
+        )}
+      </div>
+    )}
+
+    <!-- Replies -->
+    {grouped.replies.length > 0 && (
+      <div class="webmentions-section">
+        <h4 class="section-title">
+          Replies ({grouped.replies.length})
+        </h4>
+        
+        <div class="webmentions-list">
+          {grouped.replies.map((mention) => (
+            <article class="webmention webmention-reply">
+              <div class="webmention-header">
+                <a 
+                  href={mention.author?.url || '#'} 
+                  class="webmention-author"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img 
+                    src={mention.author?.photo || '/default-avatar.png'} 
+                    alt={mention.author?.name || 'Anonymous'}
+                    class="webmention-avatar"
+                    loading="lazy"
+                  />
+                  <span class="webmention-name">{mention.author?.name || 'Anonymous'}</span>
+                </a>
+                
+                <div class="webmention-meta">
+                  <span class="webmention-platform" title={getPlatformName(mention)}>
+                    {getPlatformEmoji(mention)}
+                  </span>
+                  <a 
+                    href={mention.url || '#'} 
+                    class="webmention-date"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title={new Date(mention.published || mention.wm_received || Date.now()).toLocaleString()}
+                  >
+                    {formatWebMentionDate(mention.published || mention.wm_received || new Date().toISOString())}
+                  </a>
+                </div>
+              </div>
+              
+              {mention.content && (
+                <div class="webmention-content">
+                  <Fragment set:html={sanitizeHTML(mention.content.html || mention.content.text)} />
+                </div>
+              )}
+            </article>
+          ))}
+        </div>
+      </div>
+    )}
+
+    <!-- Mentions -->
+    {grouped.mentions.length > 0 && (
+      <div class="webmentions-section">
+        <h4 class="section-title">
+          Mentions ({grouped.mentions.length})
+        </h4>
+        
+        <div class="webmentions-list">
+          {grouped.mentions.map((mention) => (
+            <article class="webmention webmention-mention">
+              <div class="webmention-header">
+                <a 
+                  href={mention.author?.url || '#'} 
+                  class="webmention-author"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img 
+                    src={mention.author?.photo || '/default-avatar.png'} 
+                    alt={mention.author?.name || 'Anonymous'}
+                    class="webmention-avatar"
+                    loading="lazy"
+                  />
+                  <span class="webmention-name">{mention.author?.name || 'Anonymous'}</span>
+                </a>
+                
+                <div class="webmention-meta">
+                  <span class="webmention-platform" title={getPlatformName(mention)}>
+                    {getPlatformEmoji(mention)}
+                  </span>
+                  <a 
+                    href={mention.url || '#'} 
+                    class="webmention-date"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title={new Date(mention.published || mention.wm_received || Date.now()).toLocaleString()}
+                  >
+                    {formatWebMentionDate(mention.published || mention.wm_received || new Date().toISOString())}
+                  </a>
+                </div>
+              </div>
+              
+              {mention.content && (
+                <div class="webmention-content">
+                  <Fragment set:html={sanitizeHTML(truncateText(mention.content.html || mention.content.text, 200))} />
+                </div>
+              )}
+            </article>
+          ))}
+        </div>
+      </div>
+    )}
+
+    <!-- Facepile for likes and reposts -->
+    {(grouped.likes.length > 0 || grouped.reposts.length > 0) && (
+      <div class="webmentions-section">
+        <h4 class="section-title">
+          Interactions
+        </h4>
+        
+        <div class="facepile-container">
+          {grouped.likes.length > 0 && (
+            <div class="facepile-group">
+              <span class="facepile-label">❤️ Liked by:</span>
+              <div class="facepile">
+                {grouped.likes.slice(0, 12).map((mention) => (
+                  <a 
+                    href={mention.author?.url || '#'}
+                    class="facepile-avatar"
+                    title={`${mention.author?.name || 'Anonymous'} (${getPlatformName(mention)})`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img 
+                      src={mention.author?.photo || '/default-avatar.png'} 
+                      alt={mention.author?.name || 'Anonymous'}
+                      loading="lazy"
+                    />
+                  </a>
+                ))}
+                {grouped.likes.length > 12 && (
+                  <span class="facepile-more">+{grouped.likes.length - 12}</span>
+                )}
+              </div>
+            </div>
+          )}
+          
+          {grouped.reposts.length > 0 && (
+            <div class="facepile-group">
+              <span class="facepile-label">🔄 Reposted by:</span>
+              <div class="facepile">
+                {grouped.reposts.slice(0, 12).map((mention) => (
+                  <a 
+                    href={mention.author?.url || '#'}
+                    class="facepile-avatar"
+                    title={`${mention.author?.name || 'Anonymous'} (${getPlatformName(mention)})`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img 
+                      src={mention.author?.photo || '/default-avatar.png'} 
+                      alt={mention.author?.name || 'Anonymous'}
+                      loading="lazy"
+                    />
+                  </a>
+                ))}
+                {grouped.reposts.length > 12 && (
+                  <span class="facepile-more">+{grouped.reposts.length - 12}</span>
+                )}
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    )}
+  </section>
+)}
+
+<style>
+  .webmentions {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    border: 1px solid var(--color-border, #e5e7eb);
+    border-radius: 0.5rem;
+    background: var(--color-bg-secondary, #f8f9fa);
+  }
+
+  .webmentions-title {
+    margin: 0 0 1rem 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-text, #1f2937);
+  }
+
+  .webmentions-summary {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding: 0.75rem;
+    background: var(--color-bg, white);
+    border-radius: 0.375rem;
+    border: 1px solid var(--color-border, #e5e7eb);
+  }
+
+  .summary-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+  }
+
+  .summary-emoji {
+    font-size: 1rem;
+  }
+
+  .summary-count {
+    font-weight: 600;
+    color: var(--color-accent, #3b82f6);
+  }
+
+  .summary-label {
+    color: var(--color-text-secondary, #6b7280);
+  }
+
+  .webmentions-section {
+    margin-bottom: 1.5rem;
+  }
+
+  .webmentions-section:last-child {
+    margin-bottom: 0;
+  }
+
+  .section-title {
+    margin: 0 0 1rem 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-text, #1f2937);
+  }
+
+  .webmentions-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .webmention {
+    padding: 1rem;
+    background: var(--color-bg, white);
+    border: 1px solid var(--color-border, #e5e7eb);
+    border-radius: 0.375rem;
+  }
+
+  .webmention-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+  }
+
+  .webmention-author {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: var(--color-text, #1f2937);
+  }
+
+  .webmention-author:hover {
+    color: var(--color-accent, #3b82f6);
+  }
+
+  .webmention-avatar {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .webmention-name {
+    font-weight: 500;
+    font-size: 0.875rem;
+  }
+
+  .webmention-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    color: var(--color-text-secondary, #6b7280);
+  }
+
+  .webmention-platform {
+    font-size: 0.875rem;
+  }
+
+  .webmention-date {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .webmention-date:hover {
+    color: var(--color-accent, #3b82f6);
+  }
+
+  .webmention-content {
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: var(--color-text, #1f2937);
+  }
+
+  .webmention-content p {
+    margin: 0;
+  }
+
+  .webmention-content a {
+    color: var(--color-accent, #3b82f6);
+    text-decoration: none;
+  }
+
+  .webmention-content a:hover {
+    text-decoration: underline;
+  }
+
+  .facepile-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .facepile-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .facepile-label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-text, #1f2937);
+  }
+
+  .facepile {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    align-items: center;
+  }
+
+  .facepile-avatar {
+    display: block;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid var(--color-bg, white);
+    transition: transform 0.2s ease;
+  }
+
+  .facepile-avatar:hover {
+    transform: scale(1.1);
+    z-index: 1;
+  }
+
+  .facepile-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .facepile-more {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background: var(--color-bg-tertiary, #e5e7eb);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--color-text-secondary, #6b7280);
+  }
+
+  /* Dark mode support */
+  @media (prefers-color-scheme: dark) {
+    .webmentions {
+      background: var(--color-bg-secondary-dark, #1f2937);
+      border-color: var(--color-border-dark, #374151);
+    }
+
+    .webmentions-summary,
+    .webmention {
+      background: var(--color-bg-dark, #111827);
+      border-color: var(--color-border-dark, #374151);
+    }
+
+    .webmentions-title,
+    .section-title,
+    .webmention-name,
+    .webmention-content,
+    .facepile-label {
+      color: var(--color-text-dark, #f9fafb);
+    }
+
+    .summary-label,
+    .webmention-meta {
+      color: var(--color-text-secondary-dark, #9ca3af);
+    }
+
+    .summary-count {
+      color: var(--color-accent-dark, #60a5fa);
+    }
+
+    .facepile-more {
+      background: var(--color-bg-tertiary-dark, #374151);
+      color: var(--color-text-secondary-dark, #9ca3af);
+    }
+  }
+
+  /* Responsive design */
+  @media (max-width: 640px) {
+    .webmentions {
+      margin: 1.5rem 0;
+      padding: 1rem;
+    }
+
+    .webmention-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .webmention-meta {
+      align-self: flex-end;
+    }
+
+    .facepile-container {
+      gap: 0.75rem;
+    }
+  }
+</style>

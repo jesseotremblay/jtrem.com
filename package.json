@@ -1,6 +1,7 @@
 {
   "name": "my-site-paper-template",
   "version": "4.2.0",
+  "type": "module",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
@@ -13,13 +14,21 @@
     "cz": "cz",
     "prepare": "husky install",
     "lint": "eslint \"src/**/*.{js,jsx,ts,tsx,astro}\" --fix",
-    "lint:check": "eslint \"src/**/*.{js,jsx,ts,tsx,astro}\""
+    "lint:check": "eslint \"src/**/*.{js,jsx,ts,tsx,astro}\"",
+    "posse": "node posse.js",
+    "posse:latest": "node posse.js",
+    "posse:help": "node posse.js --help",
+    "webmentions:test": "node test-webmentions.js",
+    "webmentions:help": "node test-webmentions.js --help",
+    "posse:test": "curl -s -I https://jtrem.com/posts/what-operator-shows-us-about-tomorrows-web | grep -E '(HTTP|Content-Type|Last-Modified)'"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
     "@astrojs/rss": "^4.0.10",
+    "@atproto/api": "^0.15.14",
     "@resvg/resvg-js": "^2.6.0",
     "astro": "^5.2.5",
+    "dotenv": "^16.5.0",
     "fuse.js": "^7.0.0",
     "github-slugger": "^2.0.0",
     "lru-cache": "^11.0.2",

@@ -7,7 +7,12 @@ import Datetime from "@components/Datetime";
 import type { CollectionEntry } from "astro:content";
 import { slugifyStr } from "@utils/slugify";
 import ShareLinks from "@components/ShareLinks.astro";
+import WebMentions from "@components/WebMentions.astro";
+import WebMentionsDynamic from "@components/WebMentionsDynamic.astro";
 import { SITE } from "@config";
+
+// Choose between static (build-time) or dynamic (client-side) webmentions
+const USE_DYNAMIC_WEBMENTIONS = true; // Set to true for real-time updates
 
 export interface Props {
   post: CollectionEntry<"blog">;
@@ -87,6 +92,12 @@ const layoutProps = {
     <ul class="my-8">
       {tags.map((tag: string) => <Tag tag={slugifyStr(tag)} />)}
     </ul>
+
+    {USE_DYNAMIC_WEBMENTIONS ? (
+      <WebMentionsDynamic url={canonicalURL || new URL(Astro.url.pathname, Astro.site).href} />
+    ) : (
+      <WebMentions url={canonicalURL || new URL(Astro.url.pathname, Astro.site).href} />
+    )}
 
     <div
       class="flex flex-col-reverse items-center justify-between gap-6 sm:flex-row-reverse sm:items-end sm:gap-4"
