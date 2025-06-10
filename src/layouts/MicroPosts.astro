@@ -1,0 +1,103 @@
+---
+import type { CollectionEntry } from "astro:content";
+import Layout from "@layouts/Layout.astro";
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
+import Datetime from "@components/Datetime";
+import Hr from "@components/Hr.astro";
+import { SITE } from "@config";
+
+export interface Props {
+  posts: CollectionEntry<"micro">[];
+  title?: string;
+  description?: string;
+}
+
+const { posts, title = "Micro Posts", description = "Quick thoughts and short updates" } = Astro.props;
+
+const layoutProps = {
+  title: `${title} | ${SITE.title}`,
+  author: SITE.author,
+  description,
+  scrollSmooth: true,
+};
+---
+
+<Layout {...layoutProps}>
+  <Header activeNav="micro" />
+  <main id="main-content">
+    <section class="pb-6 pt-8">
+      <h1 class="text-2xl font-bold sm:text-3xl">{title}</h1>
+      <p class="mt-2 text-skin-accent">{description}</p>
+    </section>
+
+    <Hr />
+
+    <section class="pb-12 pt-6">
+      {posts.length > 0 ? (
+        <ul class="space-y-8">
+          {posts.map(async (post) => {
+            const { Content } = await post.render();
+            return (
+              <li class="micro-post-item">
+                <article class="h-entry prose max-w-none">
+                  <div class="micro-post-header mb-3 flex items-center gap-3">
+                    <div class="h-card p-author">
+                      <a href="https://jtrem.com/" class="p-name u-url text-sm font-medium">
+                        Jesse Tremblay
+                      </a>
+                    </div>
+                    <span class="text-skin-muted">•</span>
+                    <Datetime
+                      pubDatetime={post.data.pubDatetime}
+                      modDatetime={post.data.modDatetime}
+                      size="sm"
+                      className="dt-published text-sm"
+                    />
+                    <a href={`/micro/${post.slug}/`} class="u-url ml-auto text-sm text-skin-accent hover:underline">
+                      Permalink
+                    </a>
+                  </div>
+                  <div class="micro-content e-content">
+                    <Content />
+                  </div>
+                </article>
+              </li>
+            );
+          })}
+        </ul>
+      ) : (
+        <div class="text-center py-12">
+          <p class="text-skin-muted">No micro posts yet.</p>
+        </div>
+      )}
+    </section>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .micro-post-item {
+    @apply border-b border-skin-line pb-6 last:border-b-0 last:pb-0;
+  }
+  
+  .micro-post-header {
+    @apply text-skin-muted;
+  }
+  
+  .micro-content {
+    @apply text-base leading-relaxed;
+  }
+  
+  .micro-content p:first-child {
+    @apply mt-0;
+  }
+  
+  .micro-content p:last-child {
+    @apply mb-0;
+  }
+  
+  .micro-content a {
+    @apply text-skin-accent hover:underline;
+  }
+</style>

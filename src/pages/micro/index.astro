@@ -1,0 +1,10 @@
+---
+import { getCollection } from "astro:content";
+import MicroPosts from "../../layouts/MicroPosts.astro";
+import getSortedMicroPosts from "../../utils/getSortedMicroPosts";
+
+const posts = await getCollection("micro");
+const sortedPosts = getSortedMicroPosts(posts);
+---
+
+<MicroPosts posts={sortedPosts} />

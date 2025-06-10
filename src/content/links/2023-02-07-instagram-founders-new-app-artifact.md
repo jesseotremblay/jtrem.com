@@ -10,6 +10,7 @@ tags:
   - Platforms
 description: "Kevin Systrom and Mike Krieger are back with a new venture, Artifact, a personalized news feed that uses machine learning to understand your interests and will soon let you discuss those articles with friends."
 canonicalURL: "https://platformer.news/p/-instagram-founders-new-app-artifact"
+linkURL: "https://platformer.news/p/-instagram-founders-new-app-artifact"
 ---
 
 Casey Newton on Platformer

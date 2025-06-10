@@ -1,0 +1,80 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
+import Datetime from "@components/Datetime";
+import type { CollectionEntry } from "astro:content";
+import { SITE } from "@config";
+
+export interface Props {
+  post: CollectionEntry<"micro">;
+}
+
+const { post } = Astro.props;
+
+const { pubDatetime, modDatetime } = post.data;
+
+const { Content } = await post.render();
+
+const layoutProps = {
+  title: `Micro Post | ${SITE.title}`,
+  author: SITE.author,
+  description: "A micro post",
+  pubDatetime,
+  modDatetime,
+  scrollSmooth: true,
+};
+---
+
+<Layout {...layoutProps}>
+  <Header activeNav="micro" />
+
+  <div class="mx-auto flex w-full max-w-3xl justify-start px-2">
+    <button
+      class="focus-outline mb-2 mt-8 flex hover:opacity-75"
+      onclick="(() => (history.length === 1) ? window.location = '/' : history.back())()"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg"
+        ><path
+          d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z"
+        ></path>
+      </svg><span>Go back</span>
+    </button>
+  </div>
+  <main id="main-content">
+    <article
+      id="article"
+      role="article"
+      class="h-entry prose mx-auto mt-8 max-w-3xl"
+    >
+      <div class="h-card p-author">
+        <a href="https://jtrem.com/" class="p-name u-url">Jesse Tremblay</a>
+      </div>
+      <Datetime
+        pubDatetime={pubDatetime}
+        modDatetime={modDatetime}
+        size="lg"
+        className="my-2 dt-published"
+      />
+      <div class="micro-content e-content mt-4">
+        <Content />
+      </div>
+    </article>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .micro-content {
+    @apply text-lg leading-relaxed;
+  }
+  
+  .micro-content p:first-child {
+    @apply mt-0;
+  }
+  
+  .micro-content p:last-child {
+    @apply mb-0;
+  }
+</style>
