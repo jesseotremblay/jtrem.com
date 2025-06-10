@@ -8,7 +8,7 @@ Link posts are a special type of content that:
 - Link directly to external URLs as their canonical destination
 - Include your commentary and thoughts about the linked content
 - Display with visual indicators (external link icons) to show they're linked content
-- Automatically redirect visitors to the external URL after 3 seconds when viewed directly
+- Automatically redirect visitors to the external URL immediately when viewed directly
 - Are included in your main RSS feed with external URLs as the canonical links
 - Can be filtered and viewed separately on the "Linked" page
 
@@ -60,7 +60,7 @@ Name your link post files descriptively:
 - Show a notice that the page will redirect to the external URL
 - Display the external domain being linked to
 - Include an external link icon in the title
-- Redirect automatically after 3 seconds (unless in iframe/preview)
+- Redirect automatically and immediately (unless in iframe/preview)
 
 ### In Lists and Feeds
 - Show an external link icon next to the title

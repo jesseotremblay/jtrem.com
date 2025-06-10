@@ -87,7 +87,7 @@ const linkDomain = new URL(linkURL).hostname.replace('www.', '');
           <span>Linked post</span>
         </div>
         <p class="mb-3 text-sm text-skin-muted">
-          This post will redirect you to the original article in 3 seconds, or you can 
+          This post links to external content. You will be redirected automatically, or you can 
           <a href={linkURL} class="text-skin-accent hover:underline" target="_blank" rel="noopener noreferrer">
             click here to go there now
           </a>.
@@ -169,11 +169,9 @@ const linkDomain = new URL(linkURL).hostname.replace('www.', '');
 </style>
 
 <script is:inline define:vars={{ linkURL }}>
-  /** Redirect to external link after 3 seconds */
+  /** Redirect to external link immediately */
   function setupRedirect() {
-    setTimeout(() => {
-      window.location.href = linkURL;
-    }, 3000);
+    window.location.href = linkURL;
   }
 
   // Only redirect if we're not in an iframe (to prevent issues with previews)
