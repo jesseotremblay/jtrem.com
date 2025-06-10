@@ -2,23 +2,26 @@
 import { type CollectionEntry, getCollection } from "astro:content";
 import TagPosts from "@layouts/TagPosts.astro";
 import getUniqueTags from "@utils/getUniqueTags";
-import getPostsByTag from "@utils/getPostsByTag";
+import getMixedPostsByTag from "@utils/getMixedPostsByTag";
 import getPageNumbers from "@utils/getPageNumbers";
 import getPagination from "@utils/getPagination";
 
 export interface Props {
-  post: CollectionEntry<"blog">;
+  post: CollectionEntry<"blog"> | CollectionEntry<"links"> | CollectionEntry<"micro">;
   tag: string;
   tagName: string;
 }
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
+  const linkPosts = await getCollection("links");
+  const microPosts = await getCollection("micro");
 
-  const tags = getUniqueTags(posts);
+  const allPosts = [...posts, ...linkPosts, ...microPosts];
+  const tags = getUniqueTags(allPosts);
 
   return tags.flatMap(({ tag, tagName }) => {
-    const tagPosts = getPostsByTag(posts, tag);
+    const tagPosts = getMixedPostsByTag(allPosts, tag);
     const totalPages = getPageNumbers(tagPosts.length);
 
     return totalPages.map(page => ({
@@ -32,8 +35,11 @@ const { page } = Astro.params;
 const { tag, tagName } = Astro.props;
 
 const posts = await getCollection("blog", ({ data }) => !data.draft);
+const linkPosts = await getCollection("links", ({ data }) => !data.draft);
+const microPosts = await getCollection("micro", ({ data }) => !data.draft);
 
-const postsByTag = getPostsByTag(posts, tag);
+const allPosts = [...posts, ...linkPosts, ...microPosts];
+const postsByTag = getMixedPostsByTag(allPosts, tag);
 
 const pagination = getPagination({
   posts: postsByTag,

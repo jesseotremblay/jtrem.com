@@ -9,8 +9,11 @@ import getUniqueTags from "../../utils/getUniqueTags";
 import { SITE } from "../../config";
 
 const posts = await getCollection("blog");
+const linkPosts = await getCollection("links");
+const microPosts = await getCollection("micro");
 
-let tags = getUniqueTags(posts);
+const allPosts = [...posts, ...linkPosts, ...microPosts];
+let tags = getUniqueTags(allPosts);
 ---
 
 <Layout title={`Tags | ${SITE.title}`}>

@@ -8,13 +8,24 @@ import Hr from "../components/Hr.astro";
 import Card from "../components/Card";
 import Socials from "../components/Socials.astro";
 import getSortedPosts from "../utils/getSortedPosts";
+import getSortedLinkPosts from "../utils/getSortedLinkPosts";
 import { SOCIALS } from "../config";
 
 const posts = await getCollection("blog");
-
+const linkPosts = await getCollection("links");
 const sortedPosts = getSortedPosts(posts);
+const sortedLinkPosts = getSortedLinkPosts(linkPosts);
 const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
 const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
+
+// Combine recent blog posts and link posts, sort by date
+const allRecentPosts = [
+  ...recentPosts.map(post => ({ ...post, type: 'blog' as const })),
+  ...sortedLinkPosts.map(post => ({ ...post, type: 'links' as const }))
+].sort((a, b) => 
+  new Date(b.data.modDatetime ?? b.data.pubDatetime).getTime() - 
+  new Date(a.data.modDatetime ?? a.data.pubDatetime).getTime()
+).slice(0, 4);
 
 const socialCount = SOCIALS.filter(social => social.active).length;
 ---
@@ -67,19 +78,19 @@ const socialCount = SOCIALS.filter(social => social.active).length;
     }
 
     {
-      recentPosts.length > 0 && (
+      allRecentPosts.length > 0 && (
         <section id="recent-posts">
           <h2>Recent Posts</h2>
           <ul>
-            {recentPosts.map(
-              ({ data, slug }, index) =>
-                index < 4 && (
-                  <Card
-                    href={`/posts/${slug}/`}
-                    frontmatter={data}
-                    secHeading={false}
-                  />
-                )
+            {allRecentPosts.map(
+              (post) => (
+                <Card
+                  href={post.type === 'blog' ? `/posts/${post.slug}/` : `/links/${post.slug}/`}
+                  frontmatter={post.data}
+                  secHeading={false}
+                  isLinkPost={post.type === 'links'}
+                />
+              )
             )}
           </ul>
         </section>

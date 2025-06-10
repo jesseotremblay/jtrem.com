@@ -1,0 +1,278 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
+import Tag from "@components/Tag.astro";
+import Datetime from "@components/Datetime";
+import type { CollectionEntry } from "astro:content";
+import { slugifyStr } from "@utils/slugify";
+import ShareLinks from "@components/ShareLinks.astro";
+import WebMentions from "@components/WebMentions.astro";
+import WebMentionsDynamic from "@components/WebMentionsDynamic.astro";
+import { SITE } from "@config";
+
+// Choose between static (build-time) or dynamic (client-side) webmentions
+const USE_DYNAMIC_WEBMENTIONS = true; // Set to true for real-time updates
+
+export interface Props {
+  post: CollectionEntry<"links">;
+}
+
+const { post } = Astro.props;
+
+const {
+  title,
+  author,
+  description,
+  ogImage,
+  canonicalURL,
+  linkURL,
+  pubDatetime,
+  modDatetime,
+  tags,
+} = post.data;
+
+const { Content } = await post.render();
+
+const ogImageUrl = typeof ogImage === "string" ? ogImage : ogImage?.src;
+const ogUrl = new URL(
+  ogImageUrl ?? `/posts/${slugifyStr(title)}.png`,
+  Astro.url.origin
+).href;
+
+const layoutProps = {
+  title: `${title} | ${SITE.title}`,
+  author,
+  description,
+  pubDatetime,
+  modDatetime,
+  canonicalURL,
+  ogImage: ogUrl,
+  scrollSmooth: true,
+};
+
+// Extract domain from linkURL for display
+const linkDomain = new URL(linkURL).hostname.replace('www.', '');
+---
+
+<Layout {...layoutProps}>
+  <Header />
+
+  <div class="mx-auto flex w-full max-w-3xl justify-start px-2">
+    <button
+      class="focus-outline mb-2 mt-8 flex hover:opacity-75"
+      onclick="(() => (history.length === 1) ? window.location = '/' : history.back())()"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg"
+        ><path
+          d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z"
+        ></path>
+      </svg><span>Go back</span>
+    </button>
+  </div>
+
+  <main id="main-content">
+    <article
+      id="article"
+      role="article"
+      class="h-entry prose mx-auto mt-8 max-w-3xl"
+    >
+      <div class="mb-4 rounded-lg border border-skin-line bg-skin-card p-4">
+        <div class="mb-2 flex items-center gap-2 text-sm text-skin-muted">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-external-link">
+            <path d="M15 3h6v6"/>
+            <path d="M10 14 21 3"/>
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+          </svg>
+          <span>Linked post</span>
+        </div>
+        <p class="mb-3 text-sm text-skin-muted">
+          This post will redirect you to the original article in 3 seconds, or you can 
+          <a href={linkURL} class="text-skin-accent hover:underline" target="_blank" rel="noopener noreferrer">
+            click here to go there now
+          </a>.
+        </p>
+        <div class="text-xs text-skin-muted">
+          External link: <span class="font-mono">{linkDomain}</span>
+        </div>
+      </div>
+
+      <h1 transition:name={slugifyStr(title)} class="post-title p-name">
+        <a href={linkURL} class="no-underline hover:underline" target="_blank" rel="noopener noreferrer">
+          {title}
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-external-link ml-2 inline-block">
+            <path d="M15 3h6v6"/>
+            <path d="M10 14 21 3"/>
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+          </svg>
+        </a>
+      </h1>
+
+      <div class="h-card p-author">
+        <a href="https://jtrem.com/" class="p-name u-url">Jesse Tremblay</a>
+      </div>
+      <Datetime
+        pubDatetime={pubDatetime}
+        modDatetime={modDatetime}
+        size="lg"
+        className="my-2 dt-published"
+      />
+      <a href={canonicalURL} class="u-url" style="display: none;">Permalink</a>
+      <div class="p-summary" style="display: none;">{description}</div>
+      
+      <div class="e-content">
+        <Content />
+      </div>
+    </article>
+
+    <ul class="my-8">
+      {tags.map((tag: string) => <Tag tag={slugifyStr(tag)} />)}
+    </ul>
+
+    {USE_DYNAMIC_WEBMENTIONS ? (
+      <WebMentionsDynamic url={new URL(Astro.url.pathname, Astro.site).href} />
+    ) : (
+      <WebMentions url={new URL(Astro.url.pathname, Astro.site).href} />
+    )}
+
+    <div
+      class="flex flex-col-reverse items-center justify-between gap-6 sm:flex-row-reverse sm:items-end sm:gap-4"
+    >
+      <button
+        id="back-to-top"
+        class="focus-outline whitespace-nowrap py-1 hover:opacity-75"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="rotate-90">
+          <path
+            d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z"
+          ></path>
+        </svg>
+        <span>Back to Top</span>
+      </button>
+
+      <ShareLinks />
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  main {
+    @apply mx-auto w-full max-w-3xl px-4 pb-12;
+  }
+  .post-title {
+    @apply text-2xl font-semibold text-skin-accent;
+  }
+  .post-title a {
+    @apply text-skin-accent;
+  }
+</style>
+
+<script is:inline define:vars={{ linkURL }}>
+  /** Redirect to external link after 3 seconds */
+  function setupRedirect() {
+    setTimeout(() => {
+      window.location.href = linkURL;
+    }, 3000);
+  }
+
+  // Only redirect if we're not in an iframe (to prevent issues with previews)
+  if (window.self === window.top) {
+    setupRedirect();
+  }
+
+  /** Create a progress indicator at the top */
+  function createProgressBar() {
+    const progressContainer = document.createElement("div");
+    progressContainer.className =
+      "progress-container fixed top-0 z-10 h-1 w-full bg-skin-fill";
+
+    const progressBar = document.createElement("div");
+    progressBar.className = "progress-bar h-1 w-0 bg-skin-accent";
+    progressBar.id = "myBar";
+
+    progressContainer.appendChild(progressBar);
+    document.body.appendChild(progressContainer);
+  }
+  createProgressBar();
+
+  /** Update the progress bar when user scrolls */
+  function updateScrollProgress() {
+    const winScroll =
+      document.body.scrollTop || document.documentElement.scrollTop;
+    const height =
+      document.documentElement.scrollHeight -
+      document.documentElement.clientHeight;
+    const scrolled = (winScroll / height) * 100;
+    if (document) {
+      const myBar = document.getElementById("myBar");
+      if (myBar) {
+        myBar.style.width = scrolled + "%";
+      }
+    }
+  }
+  document.addEventListener("scroll", updateScrollProgress);
+
+  /** Attaches links to headings in the document */
+  function addHeadingLinks() {
+    let headings = Array.from(document.querySelectorAll("h2, h3, h4, h5, h6"));
+    for (let heading of headings) {
+      heading.classList.add("group");
+      let link = document.createElement("a");
+      link.innerText = "#";
+      link.className = "heading-link hidden group-hover:inline-block ml-2";
+      link.href = "#" + heading.id;
+      link.ariaHidden = "true";
+      heading.appendChild(link);
+    }
+  }
+  addHeadingLinks();
+
+  /** Attaches copy buttons to code blocks */
+  function attachCopyButtons() {
+    let copyButtonLabel = "Copy";
+    let codeBlocks = Array.from(document.querySelectorAll("pre"));
+
+    for (let codeBlock of codeBlocks) {
+      let wrapper = document.createElement("div");
+      wrapper.style.position = "relative";
+
+      let copyButton = document.createElement("button");
+      copyButton.className =
+        "copy-code absolute right-3 -top-3 rounded bg-skin-card px-2 py-1 text-xs leading-4 text-skin-base font-medium";
+      copyButton.innerHTML = copyButtonLabel;
+      codeBlock.setAttribute("tabindex", "0");
+      codeBlock.appendChild(copyButton);
+
+      codeBlock?.parentNode?.insertBefore(wrapper, codeBlock);
+      wrapper.appendChild(codeBlock);
+
+      copyButton.addEventListener("click", async () => {
+        await copyCode(codeBlock, copyButton);
+      });
+    }
+
+    async function copyCode(block, button) {
+      let code = block.querySelector("code");
+      let text = code?.innerText;
+
+      await navigator.clipboard.writeText(text ?? "");
+
+      button.innerText = "Copied";
+
+      setTimeout(() => {
+        button.innerText = copyButtonLabel;
+      }, 700);
+    }
+  }
+  attachCopyButtons();
+
+  /** Scrolls the document to the top */
+  function backToTop() {
+    document.querySelector("#back-to-top")?.addEventListener("click", () => {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+    });
+  }
+  backToTop();
+</script>

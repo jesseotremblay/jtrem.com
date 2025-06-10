@@ -8,10 +8,12 @@ import Card from "../components/Card";
 import Pagination from "../components/Pagination.astro";
 import { SITE } from "../config";
 
+type MixedPost = CollectionEntry<"blog"> | CollectionEntry<"links"> | CollectionEntry<"micro">;
+
 export interface Props {
   currentPage: number;
   totalPages: number;
-  paginatedPosts: CollectionEntry<"blog">[];
+  paginatedPosts: MixedPost[];
   tag: string;
   tagName: string;
 }
@@ -29,9 +31,15 @@ const { currentPage, totalPages, paginatedPosts, tag, tagName } = Astro.props;
     <h1 slot="title" transition:name={tag}>{`Tag:${tag}`}</h1>
     <ul>
       {
-        paginatedPosts.map(({ data, slug }) => (
-          <Card href={`/posts/${slug}/`} frontmatter={data} />
-        ))
+        paginatedPosts.map((post) => {
+          const { data, slug, collection } = post;
+          const href = collection === "links" ? `/links/${slug}/` : `/posts/${slug}/`;
+          const isLinkPost = collection === "links";
+          
+          return (
+            <Card href={href} frontmatter={data} isLinkPost={isLinkPost} />
+          );
+        })
       }
     </ul>
   </Main>
