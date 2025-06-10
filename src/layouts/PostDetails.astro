@@ -71,22 +71,26 @@ const layoutProps = {
     </button>
   </div>
   <main id="main-content">
-    <h1 transition:name={slugifyStr(title)} class="post-title">
-      {title}
-    </h1>
-    <Datetime
-      pubDatetime={pubDatetime}
-      modDatetime={modDatetime}
-      size="lg"
-      className="my-2"
-      className="dt-published"
-    />
     <article
       id="article"
       role="article"
       class="h-entry prose mx-auto mt-8 max-w-3xl"
     >
-      <Content class="e-content p-name" />
+      <h1 transition:name={slugifyStr(title)} class="post-title p-name">
+        {title}
+      </h1>
+      <div class="h-card p-author">
+        <a href="https://jtrem.com/" class="p-name u-url">Jesse Tremblay</a>
+      </div>
+      <Datetime
+        pubDatetime={pubDatetime}
+        modDatetime={modDatetime}
+        size="lg"
+        className="my-2 dt-published"
+      />
+      <a href={canonicalURL || new URL(Astro.url.pathname, Astro.site).href} class="u-url" style="display: none;">Permalink</a>
+      <div class="p-summary" style="display: none;">{description}</div>
+      <Content class="e-content" />
     </article>
 
     <ul class="my-8">

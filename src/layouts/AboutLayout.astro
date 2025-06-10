@@ -19,8 +19,18 @@ const { frontmatter } = Astro.props;
   <Header activeNav="about" />
   <Breadcrumbs />
   <main id="main-content">
-    <section id="about" class="prose mb-28 max-w-3xl prose-img:border-0">
+    <section id="about" class="prose mb-28 max-w-3xl prose-img:border-0 h-card">
       <h1 class="text-2xl tracking-wider sm:text-3xl">{frontmatter.title}</h1>
+      <div style="display: none;">
+        <span class="p-name">Jesse Tremblay</span>
+        <a href="https://jtrem.com/" class="u-url u-uid">https://jtrem.com/</a>
+        <a href="mailto:jesse@jtrem.com" class="u-email">jesse@jtrem.com</a>
+        <span class="p-locality">Boston</span>
+        <span class="p-region">Massachusetts</span>
+        <span class="p-country-name">United States</span>
+        <span class="p-job-title">Product Leader</span>
+        <span class="p-note">Product Leader from New England who creates great software products that improve people's lives. Born & raised in New England, currently lives near Boston.</span>
+      </div>
       <slot />
     </section>
   </main>

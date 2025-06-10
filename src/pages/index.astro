@@ -25,10 +25,14 @@ const socialCount = SOCIALS.filter(social => social.active).length;
     <section id="hero">
       <h1>Hi 👋, thanks for stopping by.</h1>
 
-      <h3 class="h-card">
-        My name is <span class="p-name font-bold"> Jesse Tremblay </span> and this
-        is <a href="https://jtrem.com/" class="u-url u-uid">my site</a>.
-      </h3>
+      <div class="h-card">
+        <h3>
+          My name is <span class="p-name font-bold"> Jesse Tremblay </span> and this
+          is <a href="https://jtrem.com/" class="u-url u-uid">my site</a>.
+        </h3>
+        <p class="p-note" style="display: none;">Product Leader from New England, currently near Boston. I make great software products that improve people's lives.</p>
+        <a href="mailto:jesse@jtrem.com" class="u-email" style="display: none;">Email</a>
+      </div>
       {
         // only display if at least one social link is enabled
         socialCount > 0 && (
