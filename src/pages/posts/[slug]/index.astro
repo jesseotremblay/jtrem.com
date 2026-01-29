@@ -1,10 +1,13 @@
 ---
 import { type CollectionEntry, getCollection } from "astro:content";
-import Posts from "@layouts/Posts.astro";
+import AllPosts from "@layouts/AllPosts.astro";
 import PostDetails from "@layouts/PostDetails.astro";
 import getSortedPosts from "@utils/getSortedPosts";
+import getSortedLinkPosts from "@utils/getSortedLinkPosts";
+import getSortedMicroPosts from "@utils/getSortedMicroPosts";
 import getPageNumbers from "@utils/getPageNumbers";
 import getPagination from "@utils/getPagination";
+import { withSlug, getSlugFromId } from "@utils/getSlugFromId";
 
 export interface Props {
   post: CollectionEntry<"blog">;
@@ -12,13 +15,29 @@ export interface Props {
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog", ({ data }) => !data.draft);
+  const linkPosts = await getCollection("links", ({ data }) => !data.draft);
+  const microPosts = await getCollection("micro", ({ data }) => !data.draft);
+
+  const sortedPosts = getSortedPosts(posts);
+  const sortedLinkPosts = getSortedLinkPosts(linkPosts);
+  const sortedMicroPosts = getSortedMicroPosts(microPosts);
+
+  // Combine all posts for pagination count
+  const allPosts = [
+    ...sortedPosts.map(post => ({ ...post, type: 'blog' as const })),
+    ...sortedLinkPosts.map(post => ({ ...post, type: 'links' as const })),
+    ...sortedMicroPosts.map(post => ({ ...post, type: 'micro' as const }))
+  ].sort((a, b) => 
+    new Date(b.data.modDatetime ?? b.data.pubDatetime).getTime() - 
+    new Date(a.data.modDatetime ?? a.data.pubDatetime).getTime()
+  );
 
   const postResult = posts.map(post => ({
-    params: { slug: post.slug },
+    params: { slug: getSlugFromId(post.id) },
     props: { post },
   }));
 
-  const pagePaths = getPageNumbers(posts.length).map(pageNum => ({
+  const pagePaths = getPageNumbers(allPosts.length).map(pageNum => ({
     params: { slug: String(pageNum) },
   }));
 
@@ -29,13 +48,27 @@ const { slug } = Astro.params;
 const { post } = Astro.props;
 
 const posts = await getCollection("blog");
+const linkPosts = await getCollection("links");
+const microPosts = await getCollection("micro");
 
-const sortedPosts = getSortedPosts(posts);
+const sortedPosts = getSortedPosts(posts).map(withSlug);
+const sortedLinkPosts = getSortedLinkPosts(linkPosts).map(withSlug);
+const sortedMicroPosts = getSortedMicroPosts(microPosts).map(withSlug);
+
+// Combine all posts, sort by date
+const allPosts = [
+  ...sortedPosts.map(post => ({ ...post, type: 'blog' as const })),
+  ...sortedLinkPosts.map(post => ({ ...post, type: 'links' as const })),
+  ...sortedMicroPosts.map(post => ({ ...post, type: 'micro' as const }))
+].sort((a, b) => 
+  new Date(b.data.modDatetime ?? b.data.pubDatetime).getTime() - 
+  new Date(a.data.modDatetime ?? a.data.pubDatetime).getTime()
+);
 
 const pagination = getPagination({
-  posts: sortedPosts,
+  posts: allPosts,
   page: slug,
 });
 ---
 
-{post ? <PostDetails post={post} /> : <Posts {...pagination} />}
+{post ? <PostDetails post={post} /> : <AllPosts {...pagination} />}

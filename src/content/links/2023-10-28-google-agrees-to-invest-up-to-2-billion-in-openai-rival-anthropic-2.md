@@ -7,7 +7,7 @@ featured: false
 draft: false
 tags:
   - ai
-  - link
+  - linked
 description: "Google has agreed to invest up to $2 billion in Anthropic, a startup that is developing a new type of artificial intelligence technology that could compete with OpenAI."
 ---
 

@@ -3,12 +3,13 @@ import { getCollection } from "astro:content";
 import getSortedPosts from "../utils/getSortedPosts";
 import getSortedLinkPosts from "../utils/getSortedLinkPosts";
 import { SITE } from "../config";
+import { withSlug } from "../utils/getSlugFromId";
 
 export async function GET() {
   const posts = await getCollection("blog");
   const linkPosts = await getCollection("links");
-  const sortedPosts = getSortedPosts(posts);
-  const sortedLinkPosts = getSortedLinkPosts(linkPosts);
+  const sortedPosts = getSortedPosts(posts).map(withSlug);
+  const sortedLinkPosts = getSortedLinkPosts(linkPosts).map(withSlug);
 
   // Combine and sort all posts by date
   const allItems = [

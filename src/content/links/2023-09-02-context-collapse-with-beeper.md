@@ -8,7 +8,7 @@ draft: false
 tags:
   - open-web
   - fediverse
-  - link
+  - linked
 description: "The amount of times I have received a message from someone on Linkedin, Facebook msg, Twitter direct message (which I don’t think works anymore – as you can imagine)., etc, etc. They all end up in my inbox and its super useful but sometimes I need to look at the little icon to then figure out what I should do next."
 ---
 

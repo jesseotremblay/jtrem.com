@@ -1,6 +1,7 @@
 ---
 import { type CollectionEntry, getCollection } from "astro:content";
 import LinkPostDetails from "@layouts/LinkPostDetails.astro";
+import { getSlugFromId } from "@utils/getSlugFromId";
 
 export interface Props {
   post: CollectionEntry<"links">;
@@ -9,7 +10,7 @@ export interface Props {
 export async function getStaticPaths() {
   const posts = await getCollection("links", ({ data }) => !data.draft);
   const postResult = posts.map(post => ({
-    params: { slug: post.slug },
+    params: { slug: getSlugFromId(post.id) },
     props: { post },
   }));
   return postResult;

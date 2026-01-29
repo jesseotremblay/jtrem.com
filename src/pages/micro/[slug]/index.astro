@@ -1,7 +1,7 @@
 ---
 import { type CollectionEntry, getCollection } from "astro:content";
 import MicroPostDetails from "@layouts/MicroPostDetails.astro";
-import getSortedMicroPosts from "@utils/getSortedMicroPosts";
+import { getSlugFromId } from "@utils/getSlugFromId";
 
 export interface Props {
   post: CollectionEntry<"micro">;
@@ -11,7 +11,7 @@ export async function getStaticPaths() {
   const posts = await getCollection("micro", ({ data }) => !data.draft);
 
   const postResult = posts.map(post => ({
-    params: { slug: post.slug },
+    params: { slug: getSlugFromId(post.id) },
     props: { post },
   }));
 

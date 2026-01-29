@@ -7,7 +7,7 @@ featured: false
 draft: false
 tags:
   - ai
-  - link
+  - linked
 description: "The uncertainty around AI is rightfully getting attention and causing concern, but the future is inevitable. The hubris in believing we can control the future doesn't really"
 ---
 

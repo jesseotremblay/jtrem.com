@@ -6,9 +6,10 @@ slug: "were-not-building-a-web-browser-the-browser-company"
 featured: false
 draft: false
 tags:
-  - link
+  - linked
   - product
 description: "The Browser Company told us the browser was broken, which it is, and they are trying like hell to make it not suck."
+linkURL: "https://www.youtube.com/watch?v=u2-d5Sty-K0"
 ---
 
 Apparently Arc is going to build "A New Computer." Curious to see what that means.

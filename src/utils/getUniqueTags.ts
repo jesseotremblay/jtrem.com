@@ -8,8 +8,13 @@ interface Tag {
 }
 
 const getUniqueTags = (posts: (CollectionEntry<"blog"> | CollectionEntry<"links"> | CollectionEntry<"micro">)[]) => {
-  const tags: Tag[] = posts
+  const postsWithTags = posts
     .filter(postFilter)
+    .filter((post): post is CollectionEntry<"blog"> | CollectionEntry<"links"> => 
+      'tags' in post.data && Array.isArray(post.data.tags)
+    );
+  
+  const tags: Tag[] = postsWithTags
     .flatMap(post => post.data.tags)
     .map(tag => ({ tag: slugifyStr(tag), tagName: tag }))
     .filter(

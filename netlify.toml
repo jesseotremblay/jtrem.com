@@ -1,7 +1,19 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# Note: After deployment, enable the Netlify Prerender extension in the Netlify dashboard
+# Go to Project settings → Integrations → Extensions and install "Netlify Prerender"
+# This replaces the legacy prerendering feature
+
 [[redirects]]
   from = "/.well-known/host-meta*"
   to = "https://fed.brid.gy/.well-known/host-meta:splat"
   status = 302
+
 [[redirects]]
   from = "/.well-known/webfinger*"
   to = "https://fed.brid.gy/.well-known/webfinger"

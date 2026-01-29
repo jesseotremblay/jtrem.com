@@ -6,8 +6,9 @@ slug: "what-i-wish-someone-had-told-me-by-sam-altman"
 featured: false
 draft: false
 tags:
-  - link
+  - linked
 description: "Compounding exponentials are magic. In particular, you really want to build a business that gets a compounding advantage with scale."
+linkURL: "https://blog.samaltman.com/what-i-wish-someone-had-told-me"
 ---
 
 Sam Altman from his persona blog

@@ -7,6 +7,7 @@ import Hr from "@components/Hr.astro";
 import Card from "@components/Card";
 import { SITE } from "@config";
 import getSortedLinkPosts from "@utils/getSortedLinkPosts";
+import { withSlug } from "@utils/getSlugFromId";
 
 export async function getStaticProps() {
   return {
@@ -16,7 +17,7 @@ export async function getStaticProps() {
 
 const posts = await getCollection("links", ({ data }) => !data.draft);
 
-const sortedPosts = getSortedLinkPosts(posts);
+const sortedPosts = getSortedLinkPosts(posts).map(withSlug);
 
 
 ---

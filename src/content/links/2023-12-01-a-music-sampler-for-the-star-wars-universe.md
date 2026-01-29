@@ -4,10 +4,10 @@ pubDatetime: 2023-12-01
 title: A Music Sampler for the Star Wars Universe
 slug: "a-music-sampler-for-the-star-wars-universe"
 featured: false
-draft: true
+draft: false
 tags:
   - products
-  - link
+  - linked
 description: "Teenage Engineering is back at it. This thing looks like it belongs in the cockpit of an X-Wing. I can't even tell you what I would do with this, but I want it. I want to waste hours playing with it. Maybe making music, but more likely pretending I'm taking down Storm Troopers."
 ---
 

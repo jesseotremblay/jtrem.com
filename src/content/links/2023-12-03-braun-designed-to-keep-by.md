@@ -4,11 +4,10 @@ pubDatetime: 2023-12-03
 title: Braun - Designed to Keep by Klaus Kemp
 slug: "braun-designed-to-keep-by"
 featured: false
-draft: true
+draft: false
 tags:
   - products
   - design
-  - link-post
   - linked
 description: "Braun has designed some of the most iconic consumer products. What's most impressive has been the reverberating impact on design aesthetic & function they created."
 canonicalURL: https://www.phaidon.com/res/logo-anniversary.svg

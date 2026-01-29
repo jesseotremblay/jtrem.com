@@ -9,6 +9,7 @@ tags:
   - apple
   - life
   - steve-jobs
+  - linked
 description: "When you grow up you tend to get told the world is the way it is and your life is just to live your life inside the world. Try not to bash into the walls too much. Try to have a nice family life, have fun, save a little money."
 canonicalURL: "https://www.youtube.com/watch?v=UF8uR6Z6KLc"
 linkURL: "https://www.youtube.com/watch?v=UF8uR6Z6KLc"

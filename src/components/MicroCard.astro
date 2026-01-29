@@ -1,6 +1,7 @@
 ---
 import Datetime from "./Datetime";
 import type { CollectionEntry } from "astro:content";
+import { render } from "astro:content";
 
 export interface Props {
   post: CollectionEntry<"micro">;
@@ -9,36 +10,21 @@ export interface Props {
 
 const { post, showContent = true } = Astro.props;
 const { pubDatetime, modDatetime } = post.data;
-const { Content } = await post.render();
+const { Content } = await render(post);
 ---
 
-<li class="my-6 h-entry micro-card">
+<li class="my-6 h-entry micro-card bg-skin-card/20 rounded-lg">
   <div class="flex items-center gap-3 mb-3">
-    <div class="h-card p-author">
-      <a 
-        href="https://jtrem.com/" 
-        class="p-name u-url text-sm font-medium text-skin-accent hover:underline"
-      >
-        Jesse Tremblay
-      </a>
-    </div>
-    <span class="text-skin-muted">•</span>
     <Datetime 
       pubDatetime={pubDatetime} 
       modDatetime={modDatetime}
       size="sm"
       className="dt-published"
     />
-    <a 
-      href={`/micro/${post.slug}/`}
-      class="u-url ml-auto text-sm text-skin-accent hover:underline"
-    >
-      View
-    </a>
   </div>
   
   {showContent && (
-    <div class="micro-content e-content prose prose-sm max-w-none text-skin-base">
+    <div class="micro-content e-content prose max-w-none text-skin-base">
       <Content />
     </div>
   )}
@@ -46,7 +32,7 @@ const { Content } = await post.render();
 
 <style>
   .micro-card {
-    @apply border-b border-skin-line pb-6 last:border-b-0 last:pb-0;
+    @apply pb-6 last:pb-0;
   }
   
   .micro-content :global(p:first-child) {

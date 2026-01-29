@@ -1,0 +1,64 @@
+---
+import type { CollectionEntry } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+import Main from "../layouts/Main.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import Pagination from "../components/Pagination.astro";
+import Card from "../components/Card";
+import MicroCard from "../components/MicroCard.astro";
+import { SITE } from "../config";
+
+type MixedPost = (CollectionEntry<"blog"> | CollectionEntry<"links"> | CollectionEntry<"micro">) & {
+  type: 'blog' | 'links' | 'micro';
+  slug: string;
+};
+
+export interface Props {
+  currentPage: number;
+  totalPages: number;
+  paginatedPosts: MixedPost[];
+}
+
+const { currentPage, totalPages, paginatedPosts } = Astro.props;
+---
+
+<Layout title={`Posts | ${SITE.title}`}>
+  <Header activeNav="posts" />
+  <Main pageTitle="Posts" pageDesc="All posts, links, and micro posts in chronological order.">
+    <div class="h-feed">
+      <ul>
+        {
+          paginatedPosts.map((post) => {
+            if (post.type === 'micro') {
+              return (
+                <MicroCard
+                  post={post as CollectionEntry<"micro">}
+                  showContent={true}
+                />
+              );
+            } else {
+              return (
+                <Card
+                  href={post.type === 'blog' ? `/posts/${post.slug}/` : `/links/${post.slug}/`}
+                  frontmatter={post.data}
+                  secHeading={false}
+                  isLinkPost={post.type === 'links'}
+                />
+              );
+            }
+          })
+        }
+      </ul>
+    </div>
+  </Main>
+
+  <Pagination
+    {currentPage}
+    {totalPages}
+    prevUrl={`/posts${currentPage - 1 !== 1 ? "/" + (currentPage - 1) : ""}/`}
+    nextUrl={`/posts/${currentPage + 1}/`}
+  />
+
+  <Footer noMarginTop={totalPages > 1} />
+</Layout>

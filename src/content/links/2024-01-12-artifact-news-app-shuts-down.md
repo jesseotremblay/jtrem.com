@@ -6,9 +6,10 @@ slug: "artifact-news-app-shuts-down"
 featured: false
 draft: false
 tags:
-  - link
+  - linked
   - Platforms
 description: "Artifact, the news app from Instagram co-founder Kevin Systrom, is shutting down. The app was built to help users discover great content on the web."
+linkURL: "https://medium.com/artifact-news/shutting-down-artifact-1e70de46d419"
 ---
 
 Kevin Systrom, CEO of Artifact

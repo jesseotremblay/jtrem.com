@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import { render } from "astro:content";
 import Layout from "@layouts/Layout.astro";
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
@@ -37,26 +38,17 @@ const layoutProps = {
       {posts.length > 0 ? (
         <ul class="space-y-8">
           {posts.map(async (post) => {
-            const { Content } = await post.render();
+            const { Content } = await render(post);
             return (
-              <li class="micro-post-item">
+              <li class="micro-post-item bg-skin-card/20 rounded-lg">
                 <article class="h-entry prose max-w-none">
-                  <div class="micro-post-header mb-3 flex items-center gap-3">
-                    <div class="h-card p-author">
-                      <a href="https://jtrem.com/" class="p-name u-url text-sm font-medium">
-                        Jesse Tremblay
-                      </a>
-                    </div>
-                    <span class="text-skin-muted">•</span>
+                  <div class="micro-post-header mb-3">
                     <Datetime
                       pubDatetime={post.data.pubDatetime}
                       modDatetime={post.data.modDatetime}
                       size="sm"
                       className="dt-published text-sm"
                     />
-                    <a href={`/micro/${post.slug}/`} class="u-url ml-auto text-sm text-skin-accent hover:underline">
-                      Permalink
-                    </a>
                   </div>
                   <div class="micro-content e-content">
                     <Content />
@@ -78,11 +70,11 @@ const layoutProps = {
 
 <style>
   .micro-post-item {
-    @apply border-b border-skin-line pb-6 last:border-b-0 last:pb-0;
+    @apply mb-4 last:mb-0;
   }
   
   .micro-post-header {
-    @apply text-skin-muted;
+    @apply text-skin-muted text-sm;
   }
   
   .micro-content {

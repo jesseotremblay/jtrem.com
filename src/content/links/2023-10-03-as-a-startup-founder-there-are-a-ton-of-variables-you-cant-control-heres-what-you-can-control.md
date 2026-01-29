@@ -6,7 +6,7 @@ slug: "tootboost-as-a-startup-founder"
 featured: false
 draft: false
 tags:
-  - link
+  - linked
   - product
   - tootboost
 description: "As a startup founder, there are a ton of variables you can't control. Here's what you can control."

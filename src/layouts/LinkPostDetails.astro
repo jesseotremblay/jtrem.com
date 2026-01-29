@@ -5,6 +5,7 @@ import Footer from "@components/Footer.astro";
 import Tag from "@components/Tag.astro";
 import Datetime from "@components/Datetime";
 import type { CollectionEntry } from "astro:content";
+import { render } from "astro:content";
 import { slugifyStr } from "@utils/slugify";
 import ShareLinks from "@components/ShareLinks.astro";
 import WebMentions from "@components/WebMentions.astro";
@@ -32,7 +33,7 @@ const {
   tags,
 } = post.data;
 
-const { Content } = await post.render();
+const { Content } = await render(post);
 
 const ogImageUrl = typeof ogImage === "string" ? ogImage : ogImage?.src;
 const ogUrl = new URL(
@@ -52,7 +53,7 @@ const layoutProps = {
 };
 
 // Extract domain from linkURL for display
-const linkDomain = new URL(linkURL).hostname.replace('www.', '');
+const linkDomain = linkURL ? new URL(linkURL).hostname.replace('www.', '') : '';
 ---
 
 <Layout {...layoutProps}>
@@ -79,11 +80,6 @@ const linkDomain = new URL(linkURL).hostname.replace('www.', '');
     >
       <div class="mb-4 rounded-lg border border-skin-line bg-skin-card p-4">
         <div class="mb-2 flex items-center gap-2 text-sm text-skin-muted">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-external-link">
-            <path d="M15 3h6v6"/>
-            <path d="M10 14 21 3"/>
-            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-          </svg>
           <span>Linked post</span>
         </div>
         <p class="mb-3 text-sm text-skin-muted">
@@ -100,11 +96,6 @@ const linkDomain = new URL(linkURL).hostname.replace('www.', '');
       <h1 transition:name={slugifyStr(title)} class="post-title p-name">
         <a href={linkURL} class="no-underline hover:underline" target="_blank" rel="noopener noreferrer">
           {title}
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-external-link ml-2 inline-block">
-            <path d="M15 3h6v6"/>
-            <path d="M10 14 21 3"/>
-            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-          </svg>
         </a>
       </h1>
 

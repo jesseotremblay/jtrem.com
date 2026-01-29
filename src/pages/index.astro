@@ -12,13 +12,14 @@ import getSortedLinkPosts from "../utils/getSortedLinkPosts";
 import getSortedMicroPosts from "../utils/getSortedMicroPosts";
 import MicroCard from "../components/MicroCard.astro";
 import { SOCIALS } from "../config";
+import { withSlug } from "../utils/getSlugFromId";
 
 const posts = await getCollection("blog");
 const linkPosts = await getCollection("links");
 const microPosts = await getCollection("micro");
-const sortedPosts = getSortedPosts(posts);
-const sortedLinkPosts = getSortedLinkPosts(linkPosts);
-const sortedMicroPosts = getSortedMicroPosts(microPosts);
+const sortedPosts = getSortedPosts(posts).map(withSlug);
+const sortedLinkPosts = getSortedLinkPosts(linkPosts).map(withSlug);
+const sortedMicroPosts = getSortedMicroPosts(microPosts).map(withSlug);
 const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
 const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
 
@@ -26,11 +27,11 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
 const allRecentPosts = [
   ...recentPosts.map(post => ({ ...post, type: 'blog' as const })),
   ...sortedLinkPosts.map(post => ({ ...post, type: 'links' as const })),
-  ...sortedMicroPosts.slice(0, 3).map(post => ({ ...post, type: 'micro' as const }))
+  ...sortedMicroPosts.map(post => ({ ...post, type: 'micro' as const }))
 ].sort((a, b) => 
   new Date(b.data.modDatetime ?? b.data.pubDatetime).getTime() - 
   new Date(a.data.modDatetime ?? a.data.pubDatetime).getTime()
-).slice(0, 6);
+).slice(0, 5);
 
 const socialCount = SOCIALS.filter(social => social.active).length;
 ---
@@ -122,18 +123,6 @@ const socialCount = SOCIALS.filter(social => social.active).length;
           ></path>
         </svg>
       </LinkButton>
-      {
-        sortedMicroPosts.length > 0 && (
-          <LinkButton href="/micro/">
-            All Micro Posts
-            <svg xmlns="http://www.w3.org/2000/svg"
-              ><path
-                d="m11.293 17.293 1.414 1.414L19.414 12l-6.707-6.707-1.414 1.414L15.586 11H6v2h9.586z"
-              ></path>
-            </svg>
-          </LinkButton>
-        )
-      }
     </div>
   </main>
 

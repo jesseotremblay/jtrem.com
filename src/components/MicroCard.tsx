@@ -1,14 +1,16 @@
 import Datetime from "./Datetime";
 import type { CollectionEntry } from "astro:content";
+import { getSlugFromId } from "../utils/getSlugFromId";
 
 export interface Props {
-  post: CollectionEntry<"micro">;
+  post: CollectionEntry<"micro"> & { slug?: string };
   content?: string;
   showContent?: boolean;
 }
 
 export default function MicroCard({ post, content, showContent = true }: Props) {
   const { pubDatetime, modDatetime } = post.data;
+  const slug = post.slug || getSlugFromId(post.id);
 
   return (
     <li className="my-6 h-entry micro-card">
@@ -28,8 +30,8 @@ export default function MicroCard({ post, content, showContent = true }: Props) 
           size="sm"
           className="dt-published"
         />
-        <a 
-          href={`/micro/${post.slug}/`}
+        <a
+          href={`/micro/${slug}/`}
           className="u-url ml-auto text-sm text-skin-accent hover:underline"
         >
           View

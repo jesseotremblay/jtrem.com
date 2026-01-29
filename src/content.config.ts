@@ -1,8 +1,10 @@
-import { SITE } from "../config";
-import { defineCollection, z } from "astro:content";
+import { glob } from "astro/loaders";
+import { SITE } from "./config";
+import { defineCollection } from "astro:content";
+import { z } from "astro/zod";
 
 const blog = defineCollection({
-  type: "content",
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/blog" }),
   schema: ({ image }) =>
     z.object({
       author: z.string().default(SITE.author),
@@ -25,7 +27,7 @@ const blog = defineCollection({
 
 // New micro posts schema - minimal fields for simple text posts
 const micro = defineCollection({
-  type: "content",
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/micro" }),
   schema: z.object({
     pubDatetime: z.date(),
     modDatetime: z.date().optional().nullable(),
@@ -35,7 +37,7 @@ const micro = defineCollection({
 
 // New links schema for link posts (like Daring Fireball)
 const links = defineCollection({
-  type: "content",
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/links" }),
   schema: ({ image }) =>
     z.object({
       author: z.string().default(SITE.author),
