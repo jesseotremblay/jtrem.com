@@ -45,7 +45,7 @@
     "@astrojs/react": "^7.1.2",
     "@astrojs/sitemap": "^3.7.4",
     "@astrojs/ts-plugin": "^1.10.12",
-    "@divriots/jampack": "^0.0.9",
+    "@divriots/jampack": "^0.34.2",
     "@eslint/js": "^10.0.1",
     "@tailwindcss/typography": "^0.5.4",
     "@types/github-slugger": "^1.3.0",
